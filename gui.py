@@ -1,8 +1,9 @@
 '''
-    Class: COP4331C
+    Class: COP4331C (Summer 2017)
     Group: G13
     Graphical User Interface for LightMap
 '''
+
 import tkinter
 from tkinter import filedialog
 from tkinter import messagebox
@@ -23,7 +24,7 @@ class GUI:
         self.labelOpenFile.grid(row=1, column=1)
         
         #Make a button to open the image file.
-        self.fileChosen = None
+        self.fileChosen = None #Prevent the user from mapping without first selecting an image.
         self.buttonFile = Button(frameRoot, text="Open Image...", command=self.openFile)
         self.buttonFile.grid(row=2, column=1)
         
@@ -37,7 +38,7 @@ class GUI:
         self.labelStart = Label(frameRoot, text="Once you have selected an image, start mapping!")
         self.labelStart.grid(row=4, column=1)
         
-        #Make a button to start the program.
+        #Make a button to start the program and return the file path to the main program.
         self.buttonStart = Button(frameRoot, text="Start Mapping", command=self.returnFile)
         self.buttonStart.grid(row=5, column=1)
     
@@ -49,15 +50,14 @@ class GUI:
                                                               ("PNG", "*.PNG *.png"),
                                                               ("GIF", "*.GIF *.gif"),
                                                               ("TIFF", "*.TIF *.tif *.TIFF *.tiff"),
-                                                              ("ICO", "*.ICO *.ico"),
+                                                              ("ICO", "*.ICO *.ico")
                                                              ])
         #If a file was selected, show the file path. Else, inform the user.
         if self.fileChosen:
             self.fileName.set(self.fileChosen)
         else:
             self.fileName.set("No image was selected. Please select an image.")
-        
-        '''Write code here to send the image file to the main program.'''
+    
     
     #Start the program.
     def returnFile(self):
