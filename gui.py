@@ -5,16 +5,37 @@
 '''
 
 import tkinter
+from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 
 #Leverage an object-oriented approach to create the GUI.
 class GUI:
     #Structure the GUI.
-    def __init__(self, root):
+    def __init__(self, root):        
+        #Create the frame.
         frameRoot = Frame(root)
         frameRoot.pack()
         
+        #----------------------------------------------------------------------
+        #Create the menu.
+        menu = Menu(root)
+        root.config(menu=menu)
+        
+        #Create the "File" submenu.
+        fileMenu = Menu(menu, tearoff=0)
+        menu.add_cascade(label="File", menu=fileMenu)
+        fileMenu.add_command(label="Open Image", command=self.openFile)
+        fileMenu.add_separator()
+        fileMenu.add_command(label="Exit", command=root.destroy)
+        
+        #Create the "Settings" submenu.
+        settingsMenu = Menu(menu, tearoff=0)
+        menu.add_cascade(label="Settings", menu=settingsMenu)
+        settingsMenu.add_command(label="Configure hardware positions")
+        settingsMenu.add_separator()
+        
+        #----------------------------------------------------------------------
         #Display the name of the application.
         self.appName = Label(frameRoot, text="LightMap", fg="yellow", bg="black")
         self.appName.grid(row=0, column=1)
@@ -41,6 +62,7 @@ class GUI:
         #Make a button to start the program and return the file path to the main program.
         self.buttonStart = Button(frameRoot, text="Start Mapping", command=self.returnFile)
         self.buttonStart.grid(row=5, column=1)
+        
     
     #Open the image file.
     def openFile(self):
@@ -52,6 +74,7 @@ class GUI:
                                                               ("TIFF", "*.TIF *.tif *.TIFF *.tiff"),
                                                               ("ICO", "*.ICO *.ico")
                                                              ])
+        
         #If a file was selected, show the file path. Else, inform the user.
         if self.fileChosen:
             self.fileName.set(self.fileChosen)
