@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Wed Jun  7 14:12:37 2017
+loadImage.py
 
-@author: ian
+Class allowing users to load images and convert between pygame surfaces and
+numpy arrays easily
+
 """
 
 import numpy as np
