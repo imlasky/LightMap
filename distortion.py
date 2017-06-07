@@ -1,3 +1,11 @@
+"""
+distortion.py
+
+Taking an input image and distorting it according to the user specifications
+for distortion coefficients and camera matrix
+
+"""
+
 import numpy as np
 import cv2
 
