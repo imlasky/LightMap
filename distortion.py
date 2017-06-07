@@ -3,10 +3,14 @@ import cv2
 
 class DistortPicture:
     
-    def __init__(self,img_to_distort):
+    def __init__(self):
+        
+        self.coeffs = np.zeros((4,1),np.float64)
+        self.cameraMatrix = np.eye(3,dtype=np.float32)
+        
+    def setImage(self,img_to_distort):
         
         self.img_to_distort = img_to_distort
-        
         
     def setCenter(self,x,y):
         
@@ -28,8 +32,6 @@ class DistortPicture:
         
     def setCoeffs(self,k1,k2,p1,p2):
         
-        self.coeffs = np.zeros((4,1),np.float64)
-        
         self.coeffs[0,0] = k1
         self.coeffs[1,0] = k2
         self.coeffs[2,0] = p1
@@ -39,9 +41,12 @@ class DistortPicture:
         
         return self.coeffs
                    
-    def setCameraMatrix(self,K):
+    def setCameraMatrix(self):
         
-        self.cameraMatrix = K
+        self.cameraMatrix[0,2] = self.x
+        self.cameraMatrix[1,2] = self.y
+        self.cameraMatrix[0,0] = self.xFocal
+        self.cameraMatrix[1,1] = self.yFocal
         
     def getCameraMatrix(self):
         
