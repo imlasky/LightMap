@@ -12,22 +12,26 @@ from tkinter import messagebox
 #Leverage an object-oriented approach to create the GUI.
 class GUI:
     #Structure the GUI.
-    def __init__(self, root):        
+    def __init__(self): 
+        
+        #Create a blank window.
+        self.root = Tk()
+
         #Create the frame.
-        frameRoot = Frame(root)
+        frameRoot = Frame(self.root)
         frameRoot.pack()
         
         #----------------------------------------------------------------------
         #Create the menu.
-        menu = Menu(root)
-        root.config(menu=menu)
+        menu = Menu(self.root)
+        self.root.config(menu=menu)
         
         #Create the "File" submenu.
         fileMenu = Menu(menu, tearoff=0)
         menu.add_cascade(label="File", menu=fileMenu)
         fileMenu.add_command(label="Open Image", command=self.openFile)
         fileMenu.add_separator()
-        fileMenu.add_command(label="Exit", command=root.destroy)
+        fileMenu.add_command(label="Exit", command=self.root.destroy)
         
         #Create the "Settings" submenu.
         settingsMenu = Menu(menu, tearoff=0)
@@ -63,6 +67,9 @@ class GUI:
         self.buttonStart = Button(frameRoot, text="Start Mapping", command=self.returnFile)
         self.buttonStart.grid(row=5, column=1)
         
+        #Keep the window open.
+        self.root.mainloop()
+        
     
     #Open the image file.
     def openFile(self):
@@ -88,13 +95,9 @@ class GUI:
         if not self.fileChosen:
             tkinter.messagebox.showinfo("No File Selected", "Please select a valid image file before mapping!")
         else:
-            return self.fileChosen
+            # Added destroy call
+            self.root.destroy()
 
-#Create a blank window.
-root = Tk()
-
-#Create an object to access the class.
-g = GUI(root)
-
-#Keep the window open.
-root.mainloop()
+if __name__ == "__main__":
+    #Create an object to access the class.
+    g = GUI()   
