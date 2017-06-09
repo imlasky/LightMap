@@ -7,7 +7,7 @@ Created on Thu Jun  8 17:19:13 2017
 """
 
 import ImageProcessing as ip
-import gui
+import gui_Tkinter as gui
 
 if __name__ == "__main__":
     
