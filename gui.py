@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
+from tkinter import *
 
 #Leverage an object-oriented approach to create the GUI.
 class LightMap(QMainWindow):
@@ -40,8 +41,20 @@ class LightMap(QMainWindow):
         main_window.button_open_image.setStatusTip("Open Image")
         main_window.button_open_image.clicked.connect(self.open_file)
 
+        #Start mapping.
+        main_window.button_start_mapping.setStatusTip("Start Mapping!")
+        main_window.button_start_mapping.clicked.connect(self.start_mapping)
+
         #Show the main window.
         self.show()
+
+    def start_mapping(self):
+        #Check if the user has selected an image before sending the file path to the main program.
+        if not self.file_chosen:
+            pass
+            #messagebox.showinfo("No File Selected", "Please select a valid image file before mapping!")
+        else:
+            return self.file_chosen
 
     #Add commands for actions under the File menu.
     def command_file_menu(self, main_window):
