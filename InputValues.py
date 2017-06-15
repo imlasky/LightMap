@@ -2,31 +2,20 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jun 15 15:32:32 2017
-
 @author: eebz
 """
 
 class InputValues:
-    def setValues(self,projectorDist,cameraDist,projectorHeight,cameraHeight):
+    def __init__(self,camera_distance, camera_height, projector_distance, projector_height, filepath, record_video=False):
         
-        self.projectorDistance = projectorDist
-        self.cameraDistance = cameraDist
-        self.projectorHeight = projectorHeight
-        self.cameraHeight = cameraHeight
         
-    def getProjectorDistance(self):
+        self.camera_distance = camera_distance
+        self.camera_height = camera_height
         
-        return self.projectorDistance
+        self.projector_distance = projector_distance
+        self.projector_height = projector_height
+        
+        self.filepath = filepath
+        
+        self.record_video
     
-    def getCameraDistance(self):
-        
-        return self.cameraDistance
-        
-    def getProjectHeight(self):
-        
-        return self.projectorHeight
-    
-    def getCameraHeight(self):
-        
-        return self.cameraHeight
-        
