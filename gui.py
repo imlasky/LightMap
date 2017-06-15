@@ -34,7 +34,11 @@ class LightMap(QMainWindow):
         self.command_settings_menu(main_window)
         self.command_help_menu(main_window)
 
-        #
+        #Implement back-end logic for the Open Image button.
+        self.file_name = "No File Selected"
+        main_window.label_file_name.setText(self.file_name)
+        main_window.button_open_image.setStatusTip("Open Image")
+        main_window.button_open_image.clicked.connect(self.open_file)
 
         #Show the main window.
         self.show()
@@ -76,6 +80,12 @@ class LightMap(QMainWindow):
         options |= QFileDialog.DontUseNativeDialog
         self.file_chosen, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
             "Bitmap Files (*.BMP *.bmp *.DIB *.dib);; JPEG (*.JPEG *.jpeg *.JPG *.jpg *.JPE *.jpe *JFIF *.jfif);; PNG (*.PNG *.png);; GIF (*.GIF *.gif);; TIFF (*.TIF *.tif *.TIFF *.tiff);; ICO (*.ICO *.ico)", options=options)
+        
+        #Show the path of the file chosen.
+        if self.file_chosen:
+            self.file_name = self.file_chosen
+        else:
+            self.file_name = "No image was selected. Please select an image."
         print(self.file_chosen)
 
     #Return the image file name to the back end.
@@ -83,6 +93,7 @@ class LightMap(QMainWindow):
         #Check if the user has selected an image before sending the file path to the main program.
         if not self.file_chosen:
             QMessagebox.showinfo(self, "No File Selected", "Please select a valid image file before mapping!")
+
 
 
 if __name__ == "__main__":
