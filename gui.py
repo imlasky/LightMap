@@ -10,9 +10,10 @@ from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 from tkinter import *
+from LightMap import *
 
 #Leverage an object-oriented approach to create the GUI.
-class LightMap(QMainWindow):
+class GUI(QMainWindow):
     #Load the GUI.
     def __init__(self):
         super().__init__()
@@ -109,7 +110,4 @@ class LightMap(QMainWindow):
 
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    ex = LightMap()
-    sys.exit(app.exec_())
+
