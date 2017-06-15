@@ -16,6 +16,7 @@ class LightMap(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        #Set the window icon.
         self.window_icon = QIcon("LightMap.png")
 
         self.init_ui()
@@ -25,44 +26,57 @@ class LightMap(QMainWindow):
         #Set the window icon.
         self.setWindowIcon(self.window_icon)
 
-        uic.loadUi("mainwindow.ui", self)
+        #Load the UI file.
+        main_window = uic.loadUi("mainwindow.ui", self)
+
+        #Add commands for actions under the submenus.
+        self.command_file_menu(main_window)
+        self.command_settings_menu(main_window)
+        self.command_help_menu(main_window)
+
+        #
 
         #Show the main window.
         self.show()
 
+    #Add commands for actions under the File menu.
+    def command_file_menu(self, main_window):
+        #Back-end logic for Open Image.
+        main_window.action_open_image.setShortcut("CTRL+O")
+        main_window.action_open_image.setStatusTip("Open Image")
+        main_window.action_open_image.triggered.connect(self.open_file)
 
-    #Cascade options for the File menu.
-    def cascade_file_menu(self, file_menu):
-        #Add an open image option.
-        open_image_option = QAction("Open Image", self)
-        open_image_option.setShortcut("CTRL+O")
-        open_image_option.setStatusTip("Open image")
-        open_image_option.triggered.connect(self.open_file)
-        file_menu.addAction(open_image_option)
+        #Back-end logic for Record Video.
+        main_window.action_record_video.setShortcut("CTRL+R")
+        main_window.action_record_video.setStatusTip("Record Video")
 
-        #Add an exit option.
-        exit_option = QAction("Exit", self)
-        exit_option.setShortcut("CTRL+Q")
-        exit_option.setStatusTip("Exit application")
-        exit_option.triggered.connect(self.close)
-        file_menu.addAction(exit_option)
+        #Back-end logic for Quit.
+        main_window.action_quit.setShortcut("CTRL+Q")
+        main_window.action_quit.setStatusTip("Quit")
+        main_window.action_quit.triggered.connect(self.close)
 
-    def cascade_view_menu(self, view_menu):
-        pass
+    #Add commands for actions under the Settings menu.
+    def command_settings_menu(self, main_window):
+        #Back-end logic for Preferences.
+        main_window.action_preferences.setShortcut("CTRL+P")
+        main_window.action_preferences.setStatusTip("Preferences")
 
-    def cascade_settings_menu(self, settings_menu):
-        pass
+    #Add commands for actions sunder the Help menu.
+    def command_help_menu(self, main_window):
+        #Back-end logic for LightMap Help.
+        main_window.action_LightMap_Help.setShortcut("CTRL+H")
+        main_window.action_LightMap_Help.setStatusTip("LightMap Help")
 
-    def cascade_help_menu(self, help_menu):
-        pass
+        #Back-end logic for About LightMap.
+        main_window.action_About_LightMap.setStatusTip("About LightMap")
 
     #Open an image file.
     def open_file(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         self.file_chosen, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
-            "JPEG (*.JPEG *.jpeg *.JPG *.jpg *.JPE *.jpe *JFIF *.jfif);; PNG (*.PNG *.png)", options=options)
-        print(self.fileChosen)
+            "Bitmap Files (*.BMP *.bmp *.DIB *.dib);; JPEG (*.JPEG *.jpeg *.JPG *.jpg *.JPE *.jpe *JFIF *.jfif);; PNG (*.PNG *.png);; GIF (*.GIF *.gif);; TIFF (*.TIF *.tif *.TIFF *.tiff);; ICO (*.ICO *.ico)", options=options)
+        print(self.file_chosen)
 
     #Return the image file name to the back end.
     def return_file(self):

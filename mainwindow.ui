@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>564</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,10 +15,210 @@
   </property>
   <widget class="QWidget" name="central_widget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="bottomMargin">
+     <number>20</number>
+    </property>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontal_layout_main_middle">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="vertical_layout_main_left">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontal_layout_left_top">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <item>
+           <widget class="QPushButton" name="button_open_image">
+            <property name="text">
+             <string>Open Image</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_file_name">
+            <property name="text">
+             <string>File Name</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_select_default_image">
+          <property name="text">
+           <string>Or select from one of these images:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="1" column="1">
+           <widget class="QPushButton" name="button_default_image2">
+            <property name="text">
+             <string>Default Image 2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="button_default_image4">
+            <property name="text">
+             <string>Default Image 4</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="button_default_image1">
+            <property name="text">
+             <string>Default Image 1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="button_default_image3">
+            <property name="text">
+             <string>Default Image 3</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="check_box_record_video">
+          <property name="text">
+           <string>Record Video</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="button_start_mapping">
+          <property name="text">
+           <string>Start Mapping</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="vertical_spacer_middle1">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <spacer name="vertical_spacer_middle2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QFormLayout" name="form_layout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_projector_height">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string>Height of projector</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="buddy">
+           <cstring>line_edit_projector_height</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="line_edit_projector_height"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_projector_to_screen">
+          <property name="text">
+           <string>Distance from projector to screen</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="buddy">
+           <cstring>line_edit_projector_to_screen</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="line_edit_projector_to_screen"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_height_camera">
+          <property name="text">
+           <string>Height of camera</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+          <property name="buddy">
+           <cstring>line_edit_camera_height</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="line_edit_camera_height"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_camera_to_screen">
+          <property name="text">
+           <string>Distance from camera to screen</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+          <property name="buddy">
+           <cstring>line_edit_camera_to_screen</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="line_edit_camera_to_screen"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
     <item row="0" column="0">
-     <layout class="QGridLayout" name="grid_layout_main">
-      <item row="0" column="0">
+     <layout class="QVBoxLayout" name="vertical_layout_top">
+      <item>
        <widget class="QLabel" name="label_lightmap">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -33,111 +233,90 @@
      </layout>
     </item>
     <item row="1" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <spacer name="horizontal_spacer_light_map">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="1">
+     <layout class="QVBoxLayout" name="vertical_layout_select_unit">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_18">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
-          <item>
-           <widget class="QPushButton" name="button_open_image">
-            <property name="text">
-             <string>Open Image</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_file_name">
-            <property name="text">
-             <string>File Name</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="button_start_mapping">
-          <property name="text">
-           <string>Start Mapping</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="button_unit_projector_height">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Select unit...</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_19">
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Distance from projector to screen</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Distance from camera to screen</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Height of projector</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Height of camera</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="button_unit_projector_to_screen">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Select unit...</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QFormLayout" name="formLayout_4">
-        <item row="0" column="0">
-         <widget class="QTextEdit" name="textEdit_4"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QTextEdit" name="textEdit_3"/>
-        </item>
-        <item row="2" column="0">
-         <widget class="QTextEdit" name="textEdit_2"/>
-        </item>
-        <item row="3" column="0">
-         <widget class="QTextEdit" name="textEdit"/>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Select unit...</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>Select unit...</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="text">
-           <string>Select unit...</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="text">
-           <string>Select unit...</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="button_unit_camera_height">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Select unit...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button_unit_camera_to_screen">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Select unit...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="vertical_spacer_units">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -148,7 +327,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>564</width>
      <height>21</height>
     </rect>
    </property>
@@ -158,26 +337,26 @@
     </property>
     <addaction name="action_open_image"/>
     <addaction name="separator"/>
+    <addaction name="action_record_video"/>
+    <addaction name="action_stop_recording"/>
+    <addaction name="separator"/>
     <addaction name="action_quit"/>
-   </widget>
-   <widget class="QMenu" name="menu_view">
-    <property name="title">
-     <string>View</string>
-    </property>
-    <addaction name="action_hide_toolbar"/>
    </widget>
    <widget class="QMenu" name="menu_settings">
     <property name="title">
      <string>Settings</string>
     </property>
+    <addaction name="action_preferences"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="action_LightMap_Help"/>
+    <addaction name="separator"/>
+    <addaction name="action_About_LightMap"/>
    </widget>
    <addaction name="menu_file"/>
-   <addaction name="menu_view"/>
    <addaction name="menu_settings"/>
    <addaction name="menu_help"/>
   </widget>
@@ -195,6 +374,31 @@
   <action name="action_hide_toolbar">
    <property name="text">
     <string>Hide Toolbar</string>
+   </property>
+  </action>
+  <action name="action_record_video">
+   <property name="text">
+    <string>Record Video</string>
+   </property>
+  </action>
+  <action name="action_stop_recording">
+   <property name="text">
+    <string>Stop Recording</string>
+   </property>
+  </action>
+  <action name="action_preferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="action_LightMap_Help">
+   <property name="text">
+    <string>LightMap Help</string>
+   </property>
+  </action>
+  <action name="action_About_LightMap">
+   <property name="text">
+    <string>About LightMap</string>
    </property>
   </action>
  </widget>
