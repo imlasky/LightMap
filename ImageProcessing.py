@@ -107,10 +107,42 @@ class ImageProcessing():
         
     # Handles animated image formats 
     def animated_image(self):
-        raise TypeError("Application doesn't support this file format")
+        #raise TypeError("Application doesn't support this file format")
         
+        frames = []
+        gif = Image.open(self.filename)
+        
+        for i, frame in enumerate(self.gif_divorce(gif)):
+            frame.save('temp.png', **frame.info)
+            frames.append(cv2.imread('temp.png', 1))
+            remove('temp.png')
+            
+            # list of png frames created
+            
+        for i in range(len(frames)):
+            frames[i] = self.generate_circle(frames[i])
+            #cv2.imwrite("output%d.png" % i, frames[i])
+            
+        return frames
             
     # Breaks gif into frames and stores into list
     def gif_divorce(self, gif):
-        pass
+        try:
+            i = 0
+            while True:
+                gif.seek(i)
+                imgframe = gif.copy()
+                
+                if i == 0:
+                    palette = imgframe.getpalette()
+                    
+                else:
+                    imgframe.putpalette(palette)
+                    
+                yield imgframe
+                
+                i += 1
+                
+        except EOFError:
+            pass
                 
