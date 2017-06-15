@@ -2,12 +2,29 @@
 # -*- coding: utf-8 -*-
 
 import ImageProcessing as ip
+import DistortImage as di
 import cv2
+from gui import *
     
 class LightMap():
     def __init__(self, filename):
-        img_pro = ip.ImageProcessing(filename)
-        image = img_pro.file_sorting()
+        
+        self.filename = filename
+        self.img_pro = ip.ImageProcessing(self.filename)
+        self.images = self.img_pro.file_sorting()
+        
+        detect()
+        
+    def detect():
+        
+        (self.x,self.y,self.r) = DetectImage()
     
-        for i in range(len(image)):
-            cv2.imwrite("output{}.png".format(i), image[i])
+    
+        
+        
+        
+            
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    ex = GUI()
+    sys.exit(app.exec_())
