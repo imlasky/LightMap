@@ -11,11 +11,17 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import *
 
+import InputValues as iv
+import LightMap as lm
+
 #Leverage an object-oriented approach to create the GUI.
 class GUI(QMainWindow):
     #Load the GUI.
     def __init__(self):
         super().__init__()
+        
+        self.user_input = iv.InputValues()
+        self.light_map = lm.LightMap()
 
         #Define the window icon.
         self.window_icon = QIcon("LightMap.png")
@@ -71,6 +77,7 @@ class GUI(QMainWindow):
 
         #Everything is good to go! Send the data to the rest of the program.
         else:
+            
             #Index 0 stores the projector's height. Index 1 stores the distance from the projector to the screen.
             #Index 2 stores the camera's height. Index 3 stores the distance from the camera to the screen.
             hardware_positions = [None] * 4
@@ -81,6 +88,7 @@ class GUI(QMainWindow):
             hardware_positions[2] = self.convert_to_meters(main_window.double_spin_box_camera_height.value(), main_window.combo_box_camera_height.currentIndex())
             hardware_positions[3] = self.convert_to_meters(main_window.double_spin_box_camera_to_screen.value(), main_window.combo_box_camera_to_screen.currentIndex())
 
+            '''
             #Pass the array containing the hardware distance measurements.
             print(hardware_positions)
 
@@ -90,6 +98,13 @@ class GUI(QMainWindow):
             #If the user has chosen to record a video, call the video recording function.
             if main_window.check_box_record_video.isChecked() is True:
                 print("Record Video")
+            '''    
+                
+            record_video = main_window.check_box_record_video.isChecked()
+            
+            self.user_input.update_values(hardware_positions, self.file_chosen, record_video)
+            
+            self.light_map.launch_app(self.user_input)
 
 
     #Open an image file.

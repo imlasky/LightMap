@@ -1,23 +1,34 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import ImageProcessing as ip
-import DistortImage as di
 import cv2
-from gui import *
+import sys
+from PyQt5.QtWidgets import *
+import Gui as g
+
+if __name__ != "__main__":
+    import ImageProcessing as ip
+    import DistortImage as di
     
-class LightMap():
-    def __init__(self, filename):
+
+
+    
+class LightMap():   
+    def __init__(self):
+        self.images = ip.ImageProcessing()
         
-        self.filename = filename
-        self.img_pro = ip.ImageProcessing(self.filename)
-        self.images = self.img_pro.file_sorting()
         
-        detect()
+    def launch_app(self, user_input):
+    
         
-    def detect():
+        self.processed_image = self.images.file_sorting(user_input.filepath)
+       
+    #    detect()
         
-        (self.x,self.y,self.r) = DetectImage()
+    #def detect():
+        
+    #    (self.x,self.y,self.r) = DetectImage()
     
     
         
@@ -26,5 +37,5 @@ class LightMap():
             
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ex = GUI()
+    ex = g.GUI()
     sys.exit(app.exec_())
