@@ -325,6 +325,9 @@
           <property name="statusTip">
            <string/>
           </property>
+          <property name="value">
+           <double>1.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
@@ -341,6 +344,9 @@
          <widget class="QDoubleSpinBox" name="double_spin_box_projector_to_screen">
           <property name="statusTip">
            <string/>
+          </property>
+          <property name="value">
+           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -359,6 +365,9 @@
           <property name="statusTip">
            <string/>
           </property>
+          <property name="value">
+           <double>1.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item row="3" column="0">
@@ -375,6 +384,9 @@
          <widget class="QDoubleSpinBox" name="double_spin_box_camera_to_screen">
           <property name="statusTip">
            <string/>
+          </property>
+          <property name="value">
+           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>
