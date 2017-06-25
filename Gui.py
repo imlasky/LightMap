@@ -4,34 +4,35 @@
     Graphical User Interface for LightMap
 '''
 
-#Standard imports.
-import sys
-from PyQt5 import uic
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import *
+#Standard imports. DEBUG
+import sys #Could remove later
+from PyQt5 import uic #essential for mainwindow.ui
+from PyQt5.QtCore import pyqtSlot #Needs to stay for connection.
+from PyQt5.QtGui import QIcon, QPixmap #QPixmap is used in designer, so I could remove this, but QIcon needs to stay for window icon
+from PyQt5.QtWidgets import * #essential for widgets
 
+#FOR INDEPENDENT TESTING, COMMENT OUT THESE TWO LINES.
 import InputValues as iv
 import LightMap as lm
 
+
 #Leverage an object-oriented approach to create the GUI.
 class GUI(QMainWindow):
-    #Load the GUI.
+    
     def __init__(self):
         super().__init__()
-        
+
+        #FOR INDEPENDENT TESTING, COMMENT OUT THESE TWO LINES.
         self.user_input = iv.InputValues()
         self.light_map = lm.LightMap()
 
         #Define the window icon.
-        self.window_icon = QIcon("LightMap.png")
+        self.window_icon = QIcon("Images/LIGHTMAP.PNG")
 
         #Make the UI.
-        self.init_ui()
-    
-    #Fill the GUI.
-    def init_ui(self):
-        #Load the UI file.
+        self.init_main_window()
+
+    def init_main_window(self):
         main_window = uic.loadUi("mainwindow.ui", self)
 
         #Set the window icon.
@@ -48,15 +49,30 @@ class GUI(QMainWindow):
         #Handle the case that the user clicks on the "Open Image" button.
         main_window.button_open_image.clicked.connect(lambda: self.open_file(main_window))
 
+        #Handle the case that the user clicks on the "Record Video" checkbox.
+        main_window.check_box_record_video.toggled.connect(lambda: self.set_record_action(main_window, "checkbox"))
+
         #Make sure this variable has been declared so that we can click on "Start Mapping" at any time.
         self.file_chosen = None
 
-        #Handle the case that the user clicks on the "Start Mapping" button.
-        main_window.button_start_mapping.clicked.connect(lambda: self.start_mapping(main_window))
+        #Handle the case that the user clicks on the "Start/Stop Mapping" button.
+        main_window.button_mapping.clicked.connect(lambda: self.choose_mapping(main_window))
 
         #Show the main window.
         self.show()
 
+    def init_preferences_window(self, main_window):
+        preferences_window = PreferencesWindow()
+        preferences_window.exec()
+
+    #Depending on the state of the button, start mapping or stop mapping when the button is clicked.
+    def choose_mapping(self, main_window):
+        if main_window.button_mapping.text() == "Start Mapping":
+            self.start_mapping(main_window)
+        else:
+            self.stop_mapping(main_window)
+
+    #Map the image to the ball.
     def start_mapping(self, main_window):
         #Check if the user has selected an image before sending the file path to the main program.
         if not self.file_chosen:
@@ -77,7 +93,6 @@ class GUI(QMainWindow):
 
         #Everything is good to go! Send the data to the rest of the program.
         else:
-            
             #Index 0 stores the projector's height. Index 1 stores the distance from the projector to the screen.
             #Index 2 stores the camera's height. Index 3 stores the distance from the camera to the screen.
             hardware_positions = [None] * 4
@@ -88,7 +103,6 @@ class GUI(QMainWindow):
             hardware_positions[2] = self.convert_to_meters(main_window.double_spin_box_camera_height.value(), main_window.combo_box_camera_height.currentIndex())
             hardware_positions[3] = self.convert_to_meters(main_window.double_spin_box_camera_to_screen.value(), main_window.combo_box_camera_to_screen.currentIndex())
 
-            '''
             #Pass the array containing the hardware distance measurements.
             print(hardware_positions)
 
@@ -98,14 +112,111 @@ class GUI(QMainWindow):
             #If the user has chosen to record a video, call the video recording function.
             if main_window.check_box_record_video.isChecked() is True:
                 print("Record Video")
-            '''    
-                
-            record_video = main_window.check_box_record_video.isChecked()
-            
+
+            #FOR INDEPENDENT TESTING, COMMENT OUT THESE TWO LINES.
             self.user_input.update_values(hardware_positions, self.file_chosen, record_video)
-            
             self.light_map.launch_app(self.user_input)
 
+            #Change the "Start Mapping" button to allow a user to stop mapping.
+            main_window.button_mapping.setText("Stop Mapping")
+            main_window.button_mapping.setStatusTip("Stop Mapping")
+
+            #Disable the "Start Mapping" menu command, and enable the "Stop Mapping" menu command.
+            main_window.action_start_mapping.setDisabled(True)
+            main_window.action_stop_mapping.setDisabled(False)
+
+    #Stop the mapping program.
+    def stop_mapping(self, main_window):
+        #Implement some logic to clean up the program.
+        print("Stop Mapping")
+
+        #Change the "Stop Mapping" button to allow a user to start mapping.
+        main_window.button_mapping.setText("Start Mapping")
+        main_window.button_mapping.setStatusTip("Start Mapping")
+
+        #Enable the "Start Mapping" menu command, and disable the "Stop Mapping" menu command.
+        main_window.action_start_mapping.setDisabled(False)
+        main_window.action_stop_mapping.setDisabled(True)
+
+    #Add commands for actions under the File menu.
+    def command_file_menu(self, main_window):
+        main_window.action_open_image.setShortcut("CTRL+O")
+        main_window.action_open_image.setStatusTip("Open Image")
+        main_window.action_open_image.triggered.connect(lambda: self.open_file(main_window))
+
+        #Initialize this command to "Record Video". This command will change to "Stop Mapping" later.
+        main_window.action_record_video.setShortcut("CTRL+R")
+        main_window.action_record_video.setStatusTip("Record Video")
+        main_window.action_record_video.triggered.connect(lambda: self.set_record_action(main_window, "menu"))
+
+        main_window.action_start_mapping.setShortcut("F5")
+        main_window.action_start_mapping.setStatusTip("Start Mapping")
+        main_window.action_start_mapping.triggered.connect(lambda: self.start_mapping(main_window))
+
+        #Disable this command when the GUI is first initialized.
+        main_window.action_stop_mapping.setDisabled(True)
+        main_window.action_stop_mapping.setShortcut("F6")
+        main_window.action_stop_mapping.setStatusTip("Stop Mapping")
+        main_window.action_stop_mapping.triggered.connect(lambda: self.stop_mapping(main_window))
+
+        main_window.action_quit.setShortcut("CTRL+Q")
+        main_window.action_quit.setStatusTip("Quit")
+        main_window.action_quit.triggered.connect(self.close)
+
+    #Add commands for actions under the Settings menu.
+    def command_settings_menu(self, main_window):
+        main_window.action_preferences.setShortcut("CTRL+P")
+        main_window.action_preferences.setStatusTip("Preferences")
+        main_window.action_preferences.triggered.connect(lambda: self.init_preferences_window(main_window))
+
+    #Add commands for actions sunder the Help menu.
+    def command_help_menu(self, main_window):
+        #Back-end logic for LightMap Help.
+        main_window.action_LightMap_Help.setShortcut("CTRL+H")
+        main_window.action_LightMap_Help.setStatusTip("LightMap Help")
+
+        #Back-end logic for About LightMap.
+        main_window.action_About_LightMap.setStatusTip("About LightMap")
+
+    #Convert unit to meters.
+    def convert_to_meters(self, value, unit):
+        #If the unit is meters, there is no need to convert the unit.
+        if unit == 0: return value
+
+        #Convert from feet to inches to meters.
+        elif unit == 1: return value * 12 * 0.0254
+
+        #Convert from yards to feet to inches to meters.
+        elif unit == 2: return value * 3 * 12 * 0.0254
+
+        #Convert from inches to meters.
+        elif unit == 3: return value * 0.0254
+
+        #Convert from centimeters to meters.
+        else: return value * 0.0100
+
+    #Display status tips for all clickable widgets from the main window except for the menu.
+    def display_status(self, main_window):
+        main_window.button_open_image.setStatusTip("Open Image")
+        main_window.check_box_record_video.setStatusTip("Record Video")
+        main_window.button_mapping.setStatusTip("Start Mapping")
+
+        main_window.button_default_image1.setStatusTip("Select default image: ")
+        main_window.button_default_image2.setStatusTip("Select default image: ")
+        main_window.button_default_image3.setStatusTip("Select default image: ")
+        main_window.button_default_image4.setStatusTip("Select default image: ")
+
+        main_window.double_spin_box_projector_height.setStatusTip("Enter height of projector")
+        main_window.combo_box_projector_height.setStatusTip("Choose measurement unit for height of projector")
+
+        main_window.double_spin_box_projector_to_screen.setStatusTip("Enter distance from projector to screen")
+        main_window.combo_box_projector_to_screen.setStatusTip("Choose measurement unit for distance from projector to screen")
+
+        main_window.double_spin_box_camera_height.setStatusTip("Enter height of camera")
+        main_window.combo_box_camera_height.setStatusTip("Choose measurement unit for height of camera")
+
+        main_window.double_spin_box_camera_to_screen.setStatusTip("Enter distance from camera to screen")
+        main_window.combo_box_camera_to_screen.setStatusTip("Choose measurement unit for distance from camera to screen")
 
     #Open an image file.
     def open_file(self, main_window):
@@ -134,7 +245,7 @@ class GUI(QMainWindow):
                 #Display the abbreviated string on the label.
                 main_window.label_file_name.setText(file_name)
 
-            #Else the length of the file path string is not too long, so print the file path as is.
+            #Else the length of the file path string is not too long, so display the file path as is.
             else:
                 main_window.label_file_name.setText(self.file_chosen)
 
@@ -142,85 +253,54 @@ class GUI(QMainWindow):
         else:
             main_window.label_file_name.setText("No image was selected. Please select an image.")
 
-    #Convert unit to meters.
-    def convert_to_meters(self, value, unit):
-        #If the unit is meters, there is no need to convert the unit.
-        if unit == 0: return value
+    #Link the record option from the menu to the record checkbox on the main window.
+    def set_record_action(self, main_window, source):
+        #Handle the case that the user selected from the menu.
+        if source == "menu":
+            if main_window.check_box_record_video.isChecked() == True:
+                main_window.check_box_record_video.setChecked(False)
+                main_window.check_box_record_video.setStatusTip("Record Video")
+                main_window.action_record_video.setText("Record Video")
+                main_window.action_record_video.setStatusTip("Record Video")
+            else:
+                main_window.check_box_record_video.setChecked(True)
+                main_window.check_box_record_video.setStatusTip("Stop Recording")
+                main_window.action_record_video.setText("Stop Recording")
+                main_window.action_record_video.setStatusTip("Stop Recording")
 
-        #Convert from feet to inches to meters.
-        elif unit == 1: return value * 12 * 0.0254
+        #Handle the case that the user directly clicked on the checkbox. Note that the status of the checkbox is checked after
+        #the checkbox has been manually toggled, so everything below here is the inverse of the above.
+        elif source == "checkbox":
+            if main_window.check_box_record_video.isChecked() == True:
+                main_window.check_box_record_video.setStatusTip("Stop Recording")
+                main_window.action_record_video.setText("Stop Recording")
+                main_window.action_record_video.setStatusTip("Stop Recording")
+            else:
+                main_window.check_box_record_video.setStatusTip("Record Video")
+                main_window.action_record_video.setText("Record Video")
+                main_window.action_record_video.setStatusTip("Record Video")
 
-        #Convert from yards to feet to inches to meters.
-        elif unit == 2: return value * 3 * 12 * 0.0254
 
-        #Convert from inches to meters.
-        elif unit == 3: return value * 0.0254
+class PreferencesWindow(QDialog):
+    def __init__(self):
+        super().__init__()
 
-        #Convert from centimeters to meters.
-        else: return value * 0.0100
+        #Define the window icon.
+        self.window_icon = QIcon("Images/LIGHTMAP.PNG")
+        self.init_preferences_window()
 
-    #Add commands for actions under the File menu.
-    def command_file_menu(self, main_window):
-        #Back-end logic for Open Image.
-        main_window.action_open_image.setShortcut("CTRL+O")
-        main_window.action_open_image.setStatusTip("Open Image")
-        main_window.action_open_image.triggered.connect(lambda: self.open_file(main_window))
+    def init_preferences_window(self):
+        preferences_window = uic.loadUi("preferences.ui", self)
 
-        #Back-end logic for Record Video.
-        main_window.action_record_video.setShortcut("CTRL+R")
-        main_window.action_record_video.setStatusTip("Record Video")
-        main_window.action_record_video.triggered.connect(lambda: main_window.check_box_record_video.setChecked(True))
-        
-        #Back-end logic for Stop Recording.
-        main_window.action_stop_recording.setShortcut("CTRL+SHIFT+R")
-        main_window.action_stop_recording.setStatusTip("Stop Recording")
-        main_window.action_stop_recording.triggered.connect(lambda: main_window.check_box_record_video.setChecked(False))
+        #Set the window icon.
+        self.setWindowIcon(self.window_icon)
 
-        #Back-end logic for Quit.
-        main_window.action_quit.setShortcut("CTRL+Q")
-        main_window.action_quit.setStatusTip("Quit")
-        main_window.action_quit.triggered.connect(self.close)
+        #Show the preferences window.
+        self.show()
 
-    #Add commands for actions under the Settings menu.
-    def command_settings_menu(self, main_window):
-        #Back-end logic for Preferences.
-        main_window.action_preferences.setShortcut("CTRL+P")
-        main_window.action_preferences.setStatusTip("Preferences")
-
-    #Add commands for actions sunder the Help menu.
-    def command_help_menu(self, main_window):
-        #Back-end logic for LightMap Help.
-        main_window.action_LightMap_Help.setShortcut("CTRL+H")
-        main_window.action_LightMap_Help.setStatusTip("LightMap Help")
-
-        #Back-end logic for About LightMap.
-        main_window.action_About_LightMap.setStatusTip("About LightMap")
-
-    #Display status tips for all clickable widgets from the main window except for the menu.
-    def display_status(self, main_window):
-        main_window.button_open_image.setStatusTip("Open Image")
-        main_window.check_box_record_video.setStatusTip("Record Video")
-        main_window.button_start_mapping.setStatusTip("Enter Mapping")
-
-        main_window.button_default_image1.setStatusTip("Select default image: ")
-        main_window.button_default_image2.setStatusTip("Select default image: ")
-        main_window.button_default_image3.setStatusTip("Select default image: ")
-        main_window.button_default_image4.setStatusTip("Select default image: ")
-
-        main_window.double_spin_box_projector_height.setStatusTip("Enter height of projector")
-        main_window.combo_box_projector_height.setStatusTip("Choose measurement unit for height of projector")
-
-        main_window.double_spin_box_projector_to_screen.setStatusTip("Enter distance from projector to screen")
-        main_window.combo_box_projector_to_screen.setStatusTip("Choose measurement unit for distance from projector to screen")
-
-        main_window.double_spin_box_camera_height.setStatusTip("Enter height of camera")
-        main_window.combo_box_camera_height.setStatusTip("Choose measurement unit for height of camera")
-
-        main_window.double_spin_box_camera_to_screen.setStatusTip("Enter distance from camera to screen")
-        main_window.combo_box_camera_to_screen.setStatusTip("Choose measurement unit for distance from camera to screen")
 
 #DEBUG: DELETE LATER
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ex = GUI()
+    window = GUI()
     sys.exit(app.exec_())

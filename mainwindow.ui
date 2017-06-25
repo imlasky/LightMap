@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>695</width>
-    <height>450</height>
+    <width>821</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>LightMap</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="central_widget">
    <layout class="QGridLayout" name="gridLayout">
@@ -22,8 +25,47 @@
      <number>15</number>
     </property>
     <property name="bottomMargin">
-     <number>20</number>
+     <number>25</number>
     </property>
+    <item row="1" column="0">
+     <spacer name="horizontal_spacer_light_map">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="vertical_layout_top" stretch="0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_lightmap">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>Images/LIGHTMAP.PNG</pixmap>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignHCenter|Qt::AlignTop</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item row="2" column="0">
      <layout class="QHBoxLayout" name="horizontal_layout_main_middle">
       <property name="sizeConstraint">
@@ -41,6 +83,18 @@
           </property>
           <item>
            <widget class="QPushButton" name="button_open_image">
+            <property name="font">
+             <font>
+              <family>MS Shell Dlg 2</family>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+              <kerning>true</kerning>
+             </font>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
@@ -119,12 +173,19 @@
              <font>
               <family>MS Shell Dlg 2</family>
               <weight>50</weight>
+              <italic>false</italic>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
             </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
             <property name="text">
-             <string>No File Selected</string>
+             <string>No File Selected                                                  </string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -145,13 +206,13 @@
         </item>
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="1">
-           <widget class="QPushButton" name="button_default_image2">
+          <item row="3" column="0">
+           <widget class="QPushButton" name="button_default_image3">
             <property name="statusTip">
              <string/>
             </property>
             <property name="text">
-             <string>Default Image 2</string>
+             <string>Default Image 3</string>
             </property>
            </widget>
           </item>
@@ -165,6 +226,16 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="button_default_image2">
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Default Image 2</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QPushButton" name="button_default_image1">
             <property name="statusTip">
@@ -172,16 +243,6 @@
             </property>
             <property name="text">
              <string>Default Image 1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QPushButton" name="button_default_image3">
-            <property name="statusTip">
-             <string/>
-            </property>
-            <property name="text">
-             <string>Default Image 3</string>
             </property>
            </widget>
           </item>
@@ -198,7 +259,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="button_start_mapping">
+         <widget class="QPushButton" name="button_mapping">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="statusTip">
            <string/>
           </property>
@@ -458,44 +525,61 @@
         </item>
        </layout>
       </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
-     <spacer name="horizontal_spacer_light_map">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="0">
-     <layout class="QVBoxLayout" name="vertical_layout_top" stretch="0">
-      <property name="spacing">
-       <number>6</number>
-      </property>
       <item>
-       <widget class="QLabel" name="label_lightmap">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>Images/LIGHTMAP.PNG</pixmap>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignHCenter|Qt::AlignTop</set>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -506,7 +590,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>695</width>
+     <width>821</width>
      <height>21</height>
     </rect>
    </property>
@@ -517,7 +601,9 @@
     <addaction name="action_open_image"/>
     <addaction name="separator"/>
     <addaction name="action_record_video"/>
-    <addaction name="action_stop_recording"/>
+    <addaction name="separator"/>
+    <addaction name="action_start_mapping"/>
+    <addaction name="action_stop_mapping"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
    </widget>
@@ -709,6 +795,16 @@
     <string>About LightMap</string>
    </property>
   </action>
+  <action name="action_start_mapping">
+   <property name="text">
+    <string>Start Mapping</string>
+   </property>
+  </action>
+  <action name="action_stop_mapping">
+   <property name="text">
+    <string>Stop Mapping</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>button_open_image</tabstop>
@@ -725,7 +821,7 @@
   <tabstop>button_default_image3</tabstop>
   <tabstop>button_default_image4</tabstop>
   <tabstop>check_box_record_video</tabstop>
-  <tabstop>button_start_mapping</tabstop>
+  <tabstop>button_mapping</tabstop>
  </tabstops>
  <resources/>
  <connections/>
