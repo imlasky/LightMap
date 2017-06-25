@@ -11,9 +11,9 @@ from PyQt5.QtCore import pyqtSlot #Needs to stay for connection.
 from PyQt5.QtGui import QIcon, QPixmap #QPixmap is used in designer, so I could remove this, but QIcon needs to stay for window icon
 from PyQt5.QtWidgets import * #essential for widgets
 
-# #FOR INDEPENDENT TESTING, COMMENT OUT THESE TWO LINES.
-# import InputValues as iv
-# import LightMap as lm
+if __name__ != '__main__':
+    import InputValues as iv
+    import LightMap as lm
 
 
 #Leverage an object-oriented approach to create the GUI.
@@ -22,9 +22,9 @@ class GUI(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # #FOR INDEPENDENT TESTING, COMMENT OUT THESE TWO LINES.
-        # self.user_input = iv.InputValues()
-        # self.light_map = lm.LightMap()
+        if __name__ != "__main__":
+            self.user_input = iv.InputValues()
+            self.light_map = lm.LightMap()
 
         #Define the window icon.
         self.window_icon = QIcon("Images/LIGHTMAP.PNG")
@@ -114,10 +114,11 @@ class GUI(QMainWindow):
                 print("Record Video")
 
 
-            # #FOR INDEPENDENT TESTING, COMMENT OUT THESE THREE LINES.
-            # record_video = main_window.check_box_record_video.isChecked()
-            # self.user_input.update_values(hardware_positions, self.file_chosen, record_video)
-            # self.light_map.launch_app(self.user_input)
+            #FOR INDEPENDENT TESTING, COMMENT OUT THESE THREE LINES.
+            if __name__ != "__main__":
+                record_video = main_window.check_box_record_video.isChecked()
+                self.user_input.update_values(hardware_positions, self.file_chosen, record_video)
+                self.light_map.launch_app(self.user_input)
 
             #Change the "Start Mapping" button to allow a user to stop mapping.
             main_window.button_mapping.setText("Stop Mapping")
