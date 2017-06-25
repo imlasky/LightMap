@@ -41,5 +41,9 @@ class Detector:
                 self.x = i[0]
                 self.y = i[1]
                 self.radius = i[2]
+                
+    def stopRead(self):
+        
+        self.myCam.stopCam()
     
 
