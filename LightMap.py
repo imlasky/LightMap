@@ -3,6 +3,7 @@
 # -*- coding: utf-8 -*-
 
 import cv2
+import numpy as np
 import sys
 from PyQt5.QtWidgets import *
 import Gui as g
@@ -13,6 +14,8 @@ if __name__ != "__main__":
     import Detector
     import ImageProjector as impr
     import VideoRecorder as vr
+    import ConvertImage as ci
+    import KeyController as kc
     
     
 
@@ -21,18 +24,25 @@ if __name__ != "__main__":
 class LightMap():   
     def __init__(self):
         self.images = ip.ImageProcessing()
+        self.image_surf = ci.ConvertPicture()
+        self.project = impr.ImageProjector()
+        self.key = kc.KeyController()
+
         self.quitFlag = False
         
         
     def launch_app(self, user_input):
         self.detect = Detector.Detector()
-        self.processed_image = self.images.file_sorting(user_input.filepath)
+        earth = cv2.imread("earth.jpg")
+#        self.processed_image = self.images.file_sorting(user_input.filepath)
+#        cv2.imwrite("processed.jpg",self.processed_image[0])
+        self.processed_surface = self.image_surf.convertToSurface(earth)
+        print(np.shape(earth))
 
-        while !self.quitFlag:
-            
+        while True:
             test = self.detect.readFramesHough()
-            print(test[0],test[1],test[2])
-
+            self.project.projectImage(self.processed_surface,test[0],test[1],test[2])
+            self.key.check_keys()
         
         
         self.detect.stopRead()

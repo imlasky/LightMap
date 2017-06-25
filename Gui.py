@@ -12,8 +12,8 @@ from PyQt5.QtGui import QIcon, QPixmap #QPixmap is used in designer, so I could 
 from PyQt5.QtWidgets import * #essential for widgets
 
 # #FOR INDEPENDENT TESTING, COMMENT OUT THESE TWO LINES.
-# import InputValues as iv
-# import LightMap as lm
+import InputValues as iv
+import LightMap as lm
 
 
 #Leverage an object-oriented approach to create the GUI.
@@ -23,8 +23,8 @@ class GUI(QMainWindow):
         super().__init__()
 
         # #FOR INDEPENDENT TESTING, COMMENT OUT THESE TWO LINES.
-        # self.user_input = iv.InputValues()
-        # self.light_map = lm.LightMap()
+        self.user_input = iv.InputValues()
+        self.light_map = lm.LightMap()
 
         #Define the window icon.
         self.window_icon = QIcon("Images/LIGHTMAP.PNG")
@@ -115,9 +115,9 @@ class GUI(QMainWindow):
 
 
             # #FOR INDEPENDENT TESTING, COMMENT OUT THESE THREE LINES.
-            # record_video = main_window.check_box_record_video.isChecked()
-            # self.user_input.update_values(hardware_positions, self.file_chosen, record_video)
-            # self.light_map.launch_app(self.user_input)
+            record_video = main_window.check_box_record_video.isChecked()
+            self.user_input.update_values(hardware_positions, self.file_chosen, record_video )
+            self.light_map.launch_app(self.user_input)
 
             #Change the "Start Mapping" button to allow a user to stop mapping.
             main_window.button_mapping.setText("Stop Mapping")

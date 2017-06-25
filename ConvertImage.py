@@ -12,10 +12,10 @@ import cv2
 
 class ConvertPicture:
             
-    def __init__(self,filename):
-        
-        self.filename = filename
-        
+#    def __init__(self,filename):
+#        
+#        self.filename = filename
+#        
 #    def loadAsSurface(self):
 #        
 #        self.surface = pygame.image.load(self.filename)

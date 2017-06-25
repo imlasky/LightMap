@@ -20,13 +20,16 @@ class KeyController:
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_ESCAPE]:
             pygame.display.quit()
+            pygame.quit()
             #something else to restore the main gui
             #maybe stop recording here
             # maybe just return to main function 
         elif pressed[pygame.K_x]:
             pygame.display.quit()
+            pygame.quit()
         elif pressed[pygame.K_q]:
             pygame.display.quit()
+            pygame.quit()
         elif pressed[pygame.K_SPACE]:
             paused = (True, False)[paused]
         

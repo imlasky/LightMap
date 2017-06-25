@@ -38,9 +38,10 @@ class Detector:
             circles = np.uint16(np.around(circles))
             #draws circles
             for i in circles[0,:]:
-                self.x = i[0]
-                self.y = i[1]
-                self.radius = i[2]
+                return i
+        else:
+            return (0,0,0)
+
                 
     def stopRead(self):
         

@@ -17,6 +17,9 @@ class InputValues:
         
         self.record_video = False
         
+#        self.mapping_status = False
+        
+        
         
         
     def update_values(self, hardware_positions, filepath, record_video):
@@ -30,4 +33,7 @@ class InputValues:
         self.filepath = filepath
         
         self.record_video = record_video
+        
+#        self.mapping_status = mapping_status
+        
     

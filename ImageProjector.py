@@ -10,18 +10,21 @@ import sys
 
 class ImageProjector:
     
-    def __init__(self,screen):
-        self.screen = screen
+    def __init__(self):
+        
+        self.screen = pygame.display.set_mode((640,480))
+        pygame.init()
     
-    def project_image(self,image,(x,y)):   
+    def projectImage(self,image,x,y,r):   
     
         #fill background with in black
         self.screen.fill((0,0,0))
     
+        image2 = pygame.transform.scale(image.copy(),(2*r,2*r))
+    
         #place image at new location
-        self.screen.blit(image,(int(x),int(y)))
+        self.screen.blit(image2,(int(x),int(y)))
     
         #Updates the display
         pygame.display.flip()
     
-        return
