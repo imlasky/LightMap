@@ -25,6 +25,11 @@ class ConvertPicture:
 #        
 #        self.array = cv2.imread(self.filename)
 #        return self.array
+
+    def convertColor(self,array):
+        
+        self.array = cv2.cvtColor(array,cv2.COLOR_RGB2BGR)
+        return self.array
     
     def convertToSurface(self,array):
         
