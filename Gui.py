@@ -206,7 +206,7 @@ class GUI(QMainWindow):
     	if button_default is main_window.button_default_image1:
     		file_name = "Earth.jpg"
     	elif button_default is main_window.button_default_image2:
-    		file_name = "Moon.jpg"
+    		file_name = "Moon.gif"
     	elif button_default is main_window.button_default_image3:
     		file_name = "Smiley.jpg"
     	elif button_default is main_window.button_default_image4:
