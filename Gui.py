@@ -62,18 +62,11 @@ class GUI(QMainWindow):
         #Make sure this variable has been declared so that we can click on "Start Mapping" at any time.
         self.file_chosen = None
 
-        #Handle the case that the user clicks on the "Start/Stop Mapping" button.
-        main_window.button_mapping.clicked.connect(lambda: self.choose_mapping(main_window))
+        #Handle the case that the user clicks on the "Start Mapping" button.
+        main_window.button_mapping.clicked.connect(lambda: self.start_mapping(main_window))
 
         #Show the main window.
         self.show()
-
-    #Depending on the state of the button, start mapping or stop mapping when the button is clicked.
-    def choose_mapping(self, main_window):
-        if main_window.button_mapping.text() == "Start Mapping":
-            self.start_mapping(main_window)
-        else:
-            self.stop_mapping(main_window)
 
     #Add commands for actions under the File menu.
     def command_file_menu(self, main_window):
@@ -81,7 +74,7 @@ class GUI(QMainWindow):
         main_window.action_open_image.setStatusTip("Open Image")
         main_window.action_open_image.triggered.connect(lambda: self.open_image_file(main_window))
 
-        #Initialize this command to "Record Video". This command will change to "Stop Mapping" later.
+        #Initialize this command to "Record Video". This command will change to "Stop Recording" later.
         main_window.action_record_video.setShortcut("CTRL+R")
         main_window.action_record_video.setStatusTip("Record Video")
         main_window.action_record_video.triggered.connect(lambda: self.set_record_action(main_window, "menu"))
@@ -300,27 +293,6 @@ class GUI(QMainWindow):
                 record_video = main_window.check_box_record_video.isChecked()
                 self.user_input.update_values(hardware_positions, self.file_chosen, record_video)
                 self.light_map.launch_app(self.user_input)
-
-            #Change the "Start Mapping" button to allow a user to stop mapping.
-            main_window.button_mapping.setText("Stop Mapping")
-            main_window.button_mapping.setStatusTip("Stop Mapping")
-
-            #Disable the "Start Mapping" menu command, and enable the "Stop Mapping" menu command.
-            main_window.action_start_mapping.setDisabled(True)
-            main_window.action_stop_mapping.setDisabled(False)
-
-    #Stop the mapping program.
-    def stop_mapping(self, main_window):
-        #Implement some logic to clean up the program.
-        print("Stop Mapping")
-
-        #Change the "Stop Mapping" button to allow a user to start mapping.
-        main_window.button_mapping.setText("Start Mapping")
-        main_window.button_mapping.setStatusTip("Start Mapping")
-
-        #Enable the "Start Mapping" menu command, and disable the "Stop Mapping" menu command.
-        main_window.action_start_mapping.setDisabled(False)
-        main_window.action_stop_mapping.setDisabled(True)
 
 
 class PreferencesWindow(QDialog):
