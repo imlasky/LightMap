@@ -832,7 +832,6 @@ QPushButton:checked {
     <addaction name="action_record_video"/>
     <addaction name="separator"/>
     <addaction name="action_start_mapping"/>
-    <addaction name="action_stop_mapping"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
    </widget>
