@@ -8,6 +8,7 @@
 import pygame
 import sys
 from pygame.locals import *
+import KeyController as kc
 
 class ImageProjector:
     
@@ -15,6 +16,7 @@ class ImageProjector:
         
         pygame.init()
         self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        self.myKc = kc.KeyController(self.screen)
     
     def projectImage(self,image,x,y,r):   
     
@@ -31,20 +33,23 @@ class ImageProjector:
         #Updates the display
         pygame.display.flip()
     
-    def check_keys(self):
-        events = pygame.event.get()
-        for event in events:
-            if event.type == KEYUP:
-                if event.key == pygame.K_q:
-                    return True
-                elif event.key == pygame.K_x:
-                    return True
-                elif event.key == pygame.K_ESCAPE:
-                    return True
-            elif event.type == QUIT:
-                return True
-            else:
-                return False
+    def event(self):
+        
+        flags = self.myKc.check_keys()
+        return flags
+#        self.events = pygame.event.get()
+#        for event in events:
+#            if event.type == KEYUP:
+#                if event.key == pygame.K_q:
+#                    return True
+#                elif event.key == pygame.K_x:
+#                    return True
+#                elif event.key == pygame.K_ESCAPE:
+#                    return True
+#            elif event.type == QUIT:
+#                return True
+#            else:
+#                return False
             
     def stopProjecting(self):
         

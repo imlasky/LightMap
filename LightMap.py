@@ -25,7 +25,7 @@ class LightMap():
     def __init__(self):
         self.images = ip.ImageProcessing()
         self.image_surf = ci.ConvertPicture()
-        self.key = kc.KeyController()
+#        self.key = kc.KeyController()
 
 
         self.quitFlag = False
@@ -52,9 +52,10 @@ class LightMap():
             self.project.projectImage(self.processed_surface[frame],x,y,r)
             
             frame += 1
-            exit_flag = self.project.check_keys()
-            if exit_flag:
+            flags = self.project.event()
+            if flags[0]:
                 break
+
         
         self.project.stopProjecting()
         self.detect.stopRead()
