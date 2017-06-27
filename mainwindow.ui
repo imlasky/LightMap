@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>821</width>
-    <height>457</height>
+    <width>763</width>
+    <height>463</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,21 +25,8 @@
      <number>15</number>
     </property>
     <property name="bottomMargin">
-     <number>25</number>
+     <number>20</number>
     </property>
-    <item row="1" column="0">
-     <spacer name="horizontal_spacer_light_map">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="vertical_layout_top" stretch="0">
       <property name="spacing">
@@ -57,7 +44,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>Images/LIGHTMAP.PNG</pixmap>
+         <pixmap>Images/LightMap.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -65,6 +52,19 @@
        </widget>
       </item>
      </layout>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontal_spacer_light_map">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item row="2" column="0">
      <layout class="QHBoxLayout" name="horizontal_layout_main_middle">
@@ -77,12 +77,18 @@
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
         <item>
-         <layout class="QHBoxLayout" name="horizontal_layout_left_top">
+         <layout class="QHBoxLayout" name="horizontal_layout_image">
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
           <item>
            <widget class="QPushButton" name="button_open_image">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>MS Shell Dlg 2</family>
@@ -205,79 +211,232 @@
          </widget>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_2">
+         <layout class="QGridLayout" name="grid_layout_default_images">
           <item row="3" column="0">
            <widget class="QPushButton" name="button_default_image3">
+            <property name="minimumSize">
+             <size>
+              <width>85</width>
+              <height>65</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>65</height>
+             </size>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;Images/Smiley.jpg&quot;);
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
             <property name="text">
-             <string>Default Image 3</string>
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
            <widget class="QPushButton" name="button_default_image4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>85</width>
+              <height>65</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>65</height>
+             </size>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;Images/Hollander.jpg&quot;);
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
             <property name="text">
-             <string>Default Image 4</string>
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QPushButton" name="button_default_image2">
+            <property name="minimumSize">
+             <size>
+              <width>90</width>
+              <height>65</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>65</height>
+             </size>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;Images/Moon.jpg&quot;);
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
             <property name="text">
-             <string>Default Image 2</string>
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QPushButton" name="button_default_image1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>90</width>
+              <height>65</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>65</height>
+             </size>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;Images/Earth.jpg&quot;);
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
             <property name="text">
-             <string>Default Image 1</string>
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
+          </item>
+          <item row="1" column="2">
+           <spacer name="horizontal_spacer_top_grid">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="2">
+           <spacer name="horizontal_spacer_bottom_grid">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="check_box_record_video">
-          <property name="statusTip">
-           <string/>
+         <spacer name="horizontal_spacer_bottom_left">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="text">
-           <string>Record Video</string>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="button_mapping">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>Start Mapping</string>
-          </property>
-         </widget>
+         </spacer>
         </item>
        </layout>
       </item>
       <item>
-       <spacer name="vertical_spacer_middle1">
+       <spacer name="vertical_spacer_middle_second">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -290,306 +449,364 @@
        </spacer>
       </item>
       <item>
-       <spacer name="vertical_spacer_middle2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QFormLayout" name="form_layout">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_projector_height">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string>Height of projector</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QDoubleSpinBox" name="double_spin_box_projector_height">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="value">
-           <double>1.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_projector_to_screen">
-          <property name="text">
-           <string>Distance from projector to screen</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="double_spin_box_projector_to_screen">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="value">
-           <double>1.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_height_camera">
-          <property name="text">
-           <string>Height of camera</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QDoubleSpinBox" name="double_spin_box_camera_height">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="value">
-           <double>1.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_camera_to_screen">
-          <property name="text">
-           <string>Distance from camera to screen</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="double_spin_box_camera_to_screen">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="value">
-           <double>1.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="vertical_layout_select_unit">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QComboBox" name="combo_box_projector_height">
-          <property name="statusTip">
-           <string/>
-          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <property name="text">
-            <string>meters</string>
-           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <layout class="QFormLayout" name="form_layout">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetNoConstraint</enum>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_projector_height">
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="text">
+                 <string>Height of projector</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QDoubleSpinBox" name="double_spin_box_projector_height">
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="value">
+                 <double>1.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_projector_to_screen">
+                <property name="text">
+                 <string>Distance from projector to screen</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="double_spin_box_projector_to_screen">
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="value">
+                 <double>1.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_height_camera">
+                <property name="text">
+                 <string>Height of camera</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QDoubleSpinBox" name="double_spin_box_camera_height">
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="value">
+                 <double>1.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_camera_to_screen">
+                <property name="text">
+                 <string>Distance from camera to screen</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QDoubleSpinBox" name="double_spin_box_camera_to_screen">
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="value">
+                 <double>1.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="horizontal_spacer_middle_right">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="check_box_record_video">
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Record Video</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_mapping">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Start Mapping</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontal_spacer_bottom_right">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>feet</string>
-           </property>
+           <layout class="QVBoxLayout" name="vertical_layout_select_unit">
+            <item>
+             <widget class="QComboBox" name="combo_box_projector_height">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <item>
+               <property name="text">
+                <string>meters</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>feet</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>yards</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>inches</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>centimeters</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_box_projector_to_screen">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <item>
+               <property name="text">
+                <string>meters</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>feet</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>yards</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>inches</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>centimeters</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_box_camera_height">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <item>
+               <property name="text">
+                <string>meters</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>feet</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>yards</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>inches</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>centimeters</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_box_camera_to_screen">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <item>
+               <property name="text">
+                <string>meters</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>feet</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>yards</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>inches</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>centimeters</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="vertical_spacer_units">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>yards</string>
-           </property>
+           <layout class="QHBoxLayout" name="horizontal_layout_main_right">
+            <item>
+             <spacer name="vertical_spacer_main_right_first">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <spacer name="vertical_spacer_main_right_second">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
-          <item>
-           <property name="text">
-            <string>inches</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>centimeters</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="combo_box_projector_to_screen">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <item>
-           <property name="text">
-            <string>meters</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>feet</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>yards</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>inches</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>centimeters</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="combo_box_camera_height">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <item>
-           <property name="text">
-            <string>meters</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>feet</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>yards</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>inches</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>centimeters</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="combo_box_camera_to_screen">
-          <property name="statusTip">
-           <string/>
-          </property>
-          <item>
-           <property name="text">
-            <string>meters</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>feet</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>yards</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>inches</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>centimeters</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <spacer name="vertical_spacer_units">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
+         </layout>
         </item>
        </layout>
       </item>
@@ -602,7 +819,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>821</width>
+     <width>763</width>
      <height>21</height>
     </rect>
    </property>
@@ -760,10 +977,9 @@
     </palette>
    </property>
    <property name="styleSheet">
-    <string notr="true">QStatusBar
-{
+    <string notr="true">QStatusBar {
 	background: #e6e6e6;
-    border-top: 1px outset #686868;
+	border-top: 1px outset #686868;
 }</string>
    </property>
   </widget>
@@ -832,8 +1048,6 @@
   <tabstop>button_default_image2</tabstop>
   <tabstop>button_default_image3</tabstop>
   <tabstop>button_default_image4</tabstop>
-  <tabstop>check_box_record_video</tabstop>
-  <tabstop>button_mapping</tabstop>
  </tabstops>
  <resources/>
  <connections/>
