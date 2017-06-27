@@ -24,6 +24,9 @@ class ImageProjector:
         self.screen.fill((0,0,0))
         
         pygame.mouse.set_visible(False)
+        
+        image = pygame.transform.rotate(image.copy(),-90)
+        image = pygame.transform.flip(image.copy(),True,False)
     
         image2 = pygame.transform.scale(image.copy(),(2*r,2*r))
     
