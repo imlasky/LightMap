@@ -34,7 +34,7 @@ class Detector:
            
             #if circles are not detected, this part is skipped. helps with
             #efficiency
-        if circles != None:
+        if circles is not None:
             circles = np.uint16(np.around(circles))
             #draws circles
             for i in circles[0,:]:

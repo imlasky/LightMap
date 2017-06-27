@@ -211,14 +211,13 @@ class GUI(QMainWindow):
     def select_default_image(self, main_window, button_default):
     	#Identify the name of the image chosen.
     	if button_default is main_window.button_default_image1:
-    		file_name = "Earth"
+    		file_name = "Earth.jpg"
     	elif button_default is main_window.button_default_image2:
-    		file_name = "Moon"
+    		file_name = "Moon.gif"
     	elif button_default is main_window.button_default_image3:
-    		file_name = "Smiley"
+    		file_name = "Smiley.jpg"
     	elif button_default is main_window.button_default_image4:
-    		file_name = "Hollander"
-    	file_name += ".jpg"
+    		file_name = "Hollander.jpg"
 
     	#Show the image file name.
     	main_window.label_file_name.setText(file_name)
