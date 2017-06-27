@@ -43,15 +43,15 @@ class LightMap():
             self.processed_images[i] = self.image_surf.convertColor(self.processed_images[i].copy()[:,:,0:3])
             self.processed_surface.append(self.image_surf.convertToSurface(self.processed_images[i][:,:,0:3]))
         
-        i = 0
+        frame = 0
 
         while True:
-            i = i % len(self.processed_images)
+            frame = frame % len(self.processed_images)
             
             x, y, r = self.detect.readFramesHough()
-            self.project.projectImage(self.processed_surface[i],x,y,r)
+            self.project.projectImage(self.processed_surface[frame],x,y,r)
             
-            i += 1
+            frame += 1
             exit_flag = self.project.check_keys()
             if exit_flag:
                 break

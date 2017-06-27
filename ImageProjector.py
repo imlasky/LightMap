@@ -14,12 +14,14 @@ class ImageProjector:
     def __init__(self):
         
         pygame.init()
-        self.screen = pygame.display.set_mode((640,480))
+        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
     
     def projectImage(self,image,x,y,r):   
     
         #fill background with in black
         self.screen.fill((0,0,0))
+        
+        pygame.mouse.set_visible(False)
     
         image2 = pygame.transform.scale(image.copy(),(2*r,2*r))
     
@@ -36,6 +38,8 @@ class ImageProjector:
                 if event.key == pygame.K_q:
                     return True
                 elif event.key == pygame.K_x:
+                    return True
+                elif event.key == pygame.K_ESCAPE:
                     return True
             elif event.type == QUIT:
                 return True
