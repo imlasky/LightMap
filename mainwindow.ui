@@ -231,7 +231,7 @@
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;Images/Smiley.jpg&quot;);
+	background-image: url(&quot;./Images/Smiley.jpg&quot;);
 }
 
 QPushButton:checked {
@@ -276,7 +276,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;Images/Hollander.jpg&quot;);
+	background-image: url(&quot;./Images/Dr_Hollander.jpg&quot;);
 }
 
 QPushButton:checked {
@@ -315,7 +315,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;Images/Moon.jpg&quot;);
+	background-image: url(&quot;./Images/Moon.jpg&quot;);
 }
 
 QPushButton:checked {
@@ -369,7 +369,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;Images/Earth.jpg&quot;);
+	background-image: url(&quot;./Images/Earth.jpg&quot;);
 }
 
 QPushButton:checked {

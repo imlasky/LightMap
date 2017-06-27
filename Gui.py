@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 '''
     Class: COP4331C (Summer 2017)
     Group: G13
@@ -210,7 +212,7 @@ class GUI(QMainWindow):
     	elif button_default is main_window.button_default_image3:
     		file_name = "Smiley.jpg"
     	elif button_default is main_window.button_default_image4:
-    		file_name = "Hollander.jpg"
+    		file_name = "Dr_Hollander.jpg"
 
     	#Show the image file name.
     	main_window.label_file_name.setText(file_name)
@@ -299,7 +301,7 @@ class PreferencesWindow(QDialog):
     def __init__(self):
         super().__init__()
 
-        self.window_icon = QIcon("./Images/LIGHTMAP.PNG")
+        self.window_icon = QIcon("./Images/LightMap.png")
         self.width = 380
         self.height = 420
 
