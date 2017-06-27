@@ -276,7 +276,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Dr_Hollander.jpg&quot;);
+	background-image: url(&quot;./Images/Mystery_Man.jpg&quot;);
 }
 
 QPushButton:checked {

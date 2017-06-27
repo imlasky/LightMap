@@ -167,7 +167,7 @@ class GUI(QMainWindow):
         main_window.button_default_image1.setStatusTip("Earth")
         main_window.button_default_image2.setStatusTip("Moon")
         main_window.button_default_image3.setStatusTip("Smiley Face")
-        main_window.button_default_image4.setStatusTip("Dr. Hollander")
+        main_window.button_default_image4.setStatusTip("Mystery Man")
 
         main_window.double_spin_box_projector_height.setStatusTip("Enter height of projector")
         main_window.combo_box_projector_height.setStatusTip("Choose measurement unit for height of projector")
@@ -212,7 +212,7 @@ class GUI(QMainWindow):
     	elif button_default is main_window.button_default_image3:
     		file_name = "Smiley.jpg"
     	elif button_default is main_window.button_default_image4:
-    		file_name = "Dr_Hollander.jpg"
+    		file_name = "Mystery_Man.jpg"
 
     	#Show the image file name.
     	main_window.label_file_name.setText(file_name)
