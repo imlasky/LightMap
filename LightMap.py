@@ -25,26 +25,38 @@ class LightMap():
     def __init__(self):
         self.images = ip.ImageProcessing()
         self.image_surf = ci.ConvertPicture()
-        self.project = impr.ImageProjector()
         self.key = kc.KeyController()
+
 
         self.quitFlag = False
         
         
     def launch_app(self, user_input):
         self.detect = Detector.Detector()
-        earth = cv2.imread("earth.jpg")
-#        self.processed_image = self.images.file_sorting(user_input.filepath)
-#        cv2.imwrite("processed.jpg",self.processed_image[0])
-        self.processed_surface = self.image_surf.convertToSurface(earth)
-        print(np.shape(earth))
+        self.processed_images = self.images.file_sorting(user_input.filepath)
+        self.processed_surface = []
+        self.project = impr.ImageProjector()
+
+#        cv2.imwrite("processed.jpg",self.processed_image[0][:,:,0:2])
+        for i in range(0,len(self.processed_images)):
+            
+            self.processed_images[i] = self.image_surf.convertColor(self.processed_images[i].copy()[:,:,0:3])
+            self.processed_surface.append(self.image_surf.convertToSurface(self.processed_images[i][:,:,0:3]))
+        
+        frame = 0
 
         while True:
-            test = self.detect.readFramesHough()
-            self.project.projectImage(self.processed_surface,test[0],test[1],test[2])
-            self.key.check_keys()
+            frame = frame % len(self.processed_images)
+            
+            x, y, r = self.detect.readFramesHough()
+            self.project.projectImage(self.processed_surface[frame],x,y,r)
+            
+            frame += 1
+            exit_flag = self.project.check_keys()
+            if exit_flag:
+                break
         
-        
+        self.project.stopProjecting()
         self.detect.stopRead()
     
     
