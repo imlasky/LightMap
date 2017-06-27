@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 '''
     Class: COP4331C (Summer 2017)
     Group: G13
@@ -208,7 +206,7 @@ class GUI(QMainWindow):
     	if button_default is main_window.button_default_image1:
     		file_name = "Earth.jpg"
     	elif button_default is main_window.button_default_image2:
-    		file_name = "Moon.gif"
+    		file_name = "Moon.jpg"
     	elif button_default is main_window.button_default_image3:
     		file_name = "Smiley.jpg"
     	elif button_default is main_window.button_default_image4:
