@@ -315,7 +315,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Moon.jpg&quot;);
+	background-image: url(&quot;./Images/Moon.gif&quot;);
 }
 
 QPushButton:checked {
