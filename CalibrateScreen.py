@@ -31,7 +31,7 @@ class Calibrate:
         w, h = self.screen.get_size()
 
 
-        while not flags[1]:
+        while True:
             self.screen.fill((0,0,0))
             x, y, r = self.detect.readFramesHough()
             im = pygame.image.load('./Images/Calibration.png')
@@ -45,6 +45,8 @@ class Calibrate:
                 pygame.draw.circle(self.screen,(255,255,0),(int(w/2),int(h/2)),r,1)
             pygame.display.flip()
             flags = self.myKc.check_keys()
+            if flags[1] and r > 0:
+                break
 
         
         w2, h2, _ = np.shape(self.detect.getFrame())
