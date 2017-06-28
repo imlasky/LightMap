@@ -41,6 +41,8 @@ class Calibrate:
             im_rect.centery = int(h/2)
             
             self.screen.blit(im,(int(w/2)-int(im_rect.width/2),int(h/2)-int(im_rect.height/2)))
+            if r > 0:
+                pygame.draw.circle(self.screen,(255,255,0),(int(w/2),int(h/2)),r,1)
             pygame.display.flip()
             flags = self.myKc.check_keys()
 
@@ -52,5 +54,9 @@ class Calibrate:
         print(self.x_offset,self.y_offset)
         pygame.display.quit()
         pygame.quit()
+        
+    def getOffsets(self):
+        
+        return self.x_offset, self.y_offset
             
             
