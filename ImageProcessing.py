@@ -42,7 +42,7 @@ class ImageProcessing():
         
         image.append(cv2.imread(self.filename, 1))
         
-        image = self.generate_circle(image)
+        image = self.generate_circle(image,0)
     
         return image
             
@@ -65,11 +65,12 @@ class ImageProcessing():
         
         circle = np.zeros(dimensions, np.uint8)
         
-        cv2.circle(circle, (center[1], center[0]), radius, 1, thickness=-1)
+        mask = cv2.circle(circle, (center[1], center[0]), radius, 1, thickness=-1)
         
-        image = cv2.bitwise_and(image, image, mask=circle)
+#        print(np.shape(image))
+        image[0] = cv2.bitwise_and(image[0], image[0], mask)
         
-        image = self.trim_square(image, center, radius, frame_number)
+        image[0] = self.trim_square(image[0], center, radius, frame_number)
         
         return image
         
@@ -83,13 +84,13 @@ class ImageProcessing():
         
     # Adds alpha layer behind circle image
     def add_alpha(self, image, frame_number):
-        greyscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        greyscale = cv2.cvtColor(image[0], cv2.COLOR_BGR2GRAY)
         _, alpha = cv2.threshold(greyscale, 0, 255, cv2.THRESH_BINARY)
-        b, g, r = cv2.split(image)
+        b, g, r = cv2.split(image[0])
         
         fourlayers = [b, g, r, alpha]
         
-        image = cv2.merge(fourlayers, 4)
+        image[0] = cv2.merge(fourlayers, 4)
         
         return image
         
@@ -103,7 +104,7 @@ class ImageProcessing():
             
     # Gets the dimensions of the input image
     def get_size(self, image):
-        size = image.shape[:2]
+        size = np.shape(image[0][:,:,0:2])#image.shape[:2]
         return size
  
     def animated_image(self):
