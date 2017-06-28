@@ -137,7 +137,7 @@ class GUI(QMainWindow):
                 #Show the first 22 characters, separate with an ellipsis, and append the last 16 characters.
                 file_name = ""
 
-                for c in range(0, 22):
+                for c in range(0, 23):
                     file_name += self.file_chosen[c]
 
                 file_name += "..."

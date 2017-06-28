@@ -167,14 +167,14 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="check_box_filepath_log">
+    <widget class="QCheckBox" name="check_box_file_path_log">
      <property name="text">
-      <string>Log filepaths of chosen images</string>
+      <string>Log file paths of chosen images</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="button_clear_filepath_log">
+    <widget class="QPushButton" name="button_clear_file_path_log">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -185,7 +185,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>     Clear image filepath log     </string>
+      <string>     Clear image file path log     </string>
      </property>
      <property name="iconSize">
       <size>

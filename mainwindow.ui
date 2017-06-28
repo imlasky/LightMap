@@ -101,6 +101,9 @@
               <kerning>true</kerning>
              </font>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::ClickFocus</enum>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
@@ -226,6 +229,9 @@
               <height>65</height>
              </size>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
@@ -271,6 +277,9 @@ QPushButton:checked {
               <height>65</height>
              </size>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="statusTip">
              <string/>
             </property>
@@ -309,6 +318,9 @@ QPushButton:checked {
               <width>90</width>
               <height>65</height>
              </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
             </property>
             <property name="statusTip">
              <string/>
@@ -363,6 +375,9 @@ QPushButton:checked {
               <width>90</width>
               <height>65</height>
              </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
             </property>
             <property name="statusTip">
              <string/>
@@ -562,6 +577,9 @@ QPushButton:checked {
             </item>
             <item>
              <widget class="QCheckBox" name="check_box_record_video">
+              <property name="focusPolicy">
+               <enum>Qt::ClickFocus</enum>
+              </property>
               <property name="statusTip">
                <string/>
               </property>
@@ -583,6 +601,9 @@ QPushButton:checked {
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::ClickFocus</enum>
               </property>
               <property name="statusTip">
                <string/>
@@ -1034,7 +1055,6 @@ QPushButton:checked {
   </action>
  </widget>
  <tabstops>
-  <tabstop>button_open_image</tabstop>
   <tabstop>double_spin_box_projector_height</tabstop>
   <tabstop>combo_box_projector_height</tabstop>
   <tabstop>double_spin_box_projector_to_screen</tabstop>
@@ -1043,10 +1063,6 @@ QPushButton:checked {
   <tabstop>combo_box_camera_height</tabstop>
   <tabstop>double_spin_box_camera_to_screen</tabstop>
   <tabstop>combo_box_camera_to_screen</tabstop>
-  <tabstop>button_default_image1</tabstop>
-  <tabstop>button_default_image2</tabstop>
-  <tabstop>button_default_image3</tabstop>
-  <tabstop>button_default_image4</tabstop>
  </tabstops>
  <resources/>
  <connections/>
