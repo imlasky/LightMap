@@ -44,7 +44,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>Images/LightMap.png</pixmap>
+         <pixmap>../Images/LightMap.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -237,7 +237,7 @@
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Smiley.jpg&quot;);
+	background-image: url(&quot;../Images/Smiley.jpg&quot;);
 	background-position: center;	
 }
 
@@ -268,7 +268,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Mystery_Image.jpg&quot;);
+	background-image: url(&quot;../Images/Mystery_Image.jpg&quot;);
 	background-position: center;
 }
 
@@ -280,6 +280,12 @@ QPushButton:checked {
             </property>
             <property name="text">
              <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -311,7 +317,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Earth.jpg&quot;);
+	background-image: url(&quot;../Images/Earth.jpg&quot;);
 	background-position: center;
 }
 
@@ -357,7 +363,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Moon.gif&quot;);
+	background-image: url(&quot;../Images/Moon.gif&quot;);
 	background-position: center;
 }
 
@@ -429,7 +435,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Kappa.jpg&quot;);
+	background-image: url(&quot;../Images/Kappa.jpg&quot;);
 	background-position: center;
 }
 
@@ -441,6 +447,12 @@ QPushButton:checked {
             </property>
             <property name="text">
              <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -472,7 +484,7 @@ QPushButton:checked {
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
-	background-image: url(&quot;./Images/Mystery_Man.jpg&quot;);
+	background-image: url(&quot;../Images/Pizza.jpg&quot;);
 	background-position: center;
 }
 

@@ -27,7 +27,7 @@ class GUI(QMainWindow):
             self.user_input = iv.InputValues()
             self.light_map = lm.LightMap()
 
-        self.window_icon = QIcon("./Images/LightMap.png")
+        self.window_icon = QIcon("../Images/LightMap.png")
         self.width = 715
         self.height = 435
 
@@ -165,7 +165,7 @@ class GUI(QMainWindow):
         main_window.button_default_image1.setStatusTip("Earth")
         main_window.button_default_image2.setStatusTip("Moon")
         main_window.button_default_image3.setStatusTip("Smiley Face")
-        main_window.button_default_image4.setStatusTip("")
+        main_window.button_default_image4.setStatusTip("Pizza")
         main_window.button_default_image5.setStatusTip("Kappa")
         main_window.button_default_image6.setStatusTip("Mystery Image")
 
@@ -205,25 +205,28 @@ class GUI(QMainWindow):
     #Select the default image that was chosen by the user.
     def select_default_image(self, main_window, button_default):
     	#Identify the name of the image chosen.
-    	if button_default is main_window.button_default_image1:
-    		file_name = "Earth.jpg"
-    	elif button_default is main_window.button_default_image2:
-    		file_name = "Moon.gif"
-    	elif button_default is main_window.button_default_image3:
-    		file_name = "Smiley.jpg"
-    	elif button_default is main_window.button_default_image4:
-    		file_name = "An Image.jpg"
+        if button_default is main_window.button_default_image1:
+            file_name = "Earth.jpg"
+        elif button_default is main_window.button_default_image2:
+            file_name = "Moon.gif"
+        elif button_default is main_window.button_default_image3:
+            file_name = "Smiley.jpg"
+        elif button_default is main_window.button_default_image4:
+            file_name = "Pizza.jpg"
         elif button_default is main_window.button_default_image5:
             file_name = "Kappa.jpg"
         elif button_default is main_window.button_default_image6:
             file_name = "Mystery_Image.jpg"
 
     	#Show the image file name.
-    	main_window.label_file_name.setText(file_name)
+        main_window.label_file_name.setText(file_name)
 
     	#Provide relative pathing to send back to the main program. All images are in the Images folder.
-    	self.file_chosen = "./Images/"
-    	self.file_chosen += file_name
+        if button_default is not main_window.button_default_image6:
+            self.file_chosen = "../Images/"
+            self.file_chosen += file_name
+        else:
+            self.file_chosen = "../Images/Mystery_Man.jpg"
 
 
     #Link the record option from the menu to the record checkbox on the main window.
@@ -305,7 +308,7 @@ class PreferencesWindow(QDialog):
     def __init__(self):
         super().__init__()
 
-        self.window_icon = QIcon("./Images/LightMap.png")
+        self.window_icon = QIcon("../Images/LightMap.png")
         self.width = 380
         self.height = 420
 
