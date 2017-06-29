@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>777</width>
+    <height>476</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LightMap</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <widget class="QWidget" name="central_widget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>15</number>
+    </property>
+    <property name="rightMargin">
+     <number>15</number>
+    </property>
+    <property name="bottomMargin">
+     <number>20</number>
+    </property>
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="vertical_layout_top" stretch="0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_lightmap">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>Images/LightMap.png</pixmap>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignHCenter|Qt::AlignTop</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontal_spacer_light_map">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontal_layout_main_middle">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="vertical_layout_main_left">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontal_layout_image">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <item>
+           <widget class="QPushButton" name="button_open_image">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>MS Shell Dlg 2</family>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::ClickFocus</enum>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Open Image</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_file_name">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>5</green>
+                  <blue>5</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>5</green>
+                  <blue>5</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Text">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="font">
+             <font>
+              <family>MS Shell Dlg 2</family>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <property name="text">
+             <string>No File Selected                                                  </string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_select_default_image">
+          <property name="text">
+           <string>Or select from one of these images:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="grid_layout_default_images">
+          <item row="1" column="3">
+           <widget class="QPushButton" name="button_default_image3">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;./Images/Smiley.jpg&quot;);
+	background-position: center;	
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QPushButton" name="button_default_image6">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;./Images/Mystery_Image.jpg&quot;);
+	background-position: center;
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="button_default_image1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;./Images/Earth.jpg&quot;);
+	background-position: center;
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="button_default_image2">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;./Images/Moon.gif&quot;);
+	background-position: center;
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <spacer name="horizontal_spacer_grid_top">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="5">
+           <spacer name="horizontal_spacer_grid_bottom">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="button_default_image5">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;./Images/Kappa.jpg&quot;);
+	background-position: center;
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="button_default_image4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-image: url(&quot;./Images/Mystery_Man.jpg&quot;);
+	background-position: center;
+}
+
+QPushButton:checked {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E89F7;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontal_spacer_bottom_left">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="vertical_spacer_middle_second">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontal_layout_main_right_2">
+        <item>
+         <layout class="QVBoxLayout" name="vertical_layout_middle_right">
+          <item>
+           <layout class="QFormLayout" name="form_layout">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetNoConstraint</enum>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_projector_height">
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Height of projector</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="double_spin_box_projector_height">
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_projector_to_screen">
+              <property name="text">
+               <string>Distance from projector to screen</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="double_spin_box_projector_to_screen">
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_height_camera">
+              <property name="text">
+               <string>Height of camera</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="double_spin_box_camera_height">
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_camera_to_screen">
+              <property name="text">
+               <string>Distance from camera to screen</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QDoubleSpinBox" name="double_spin_box_camera_to_screen">
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="horizontal_spacer_middle_right">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_box_record_video">
+            <property name="focusPolicy">
+             <enum>Qt::ClickFocus</enum>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Record Video</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="button_mapping">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::ClickFocus</enum>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Start Mapping</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontal_spacer_bottom_right">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="vertical_layout_select_unit">
+          <item>
+           <widget class="QComboBox" name="combo_box_projector_height">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>meters</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>feet</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>yards</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>inches</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>centimeters</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="combo_box_projector_to_screen">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>meters</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>feet</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>yards</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>inches</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>centimeters</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="combo_box_camera_height">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>meters</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>feet</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>yards</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>inches</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>centimeters</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="combo_box_camera_to_screen">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>meters</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>feet</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>yards</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>inches</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>centimeters</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="vertical_spacer_units">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontal_layout_main_right">
+          <item>
+           <spacer name="vertical_spacer_main_right_first">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <spacer name="vertical_spacer_main_right_second">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>777</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_file">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="action_open_image"/>
+    <addaction name="separator"/>
+    <addaction name="action_record_video"/>
+    <addaction name="separator"/>
+    <addaction name="action_start_mapping"/>
+    <addaction name="separator"/>
+    <addaction name="action_quit"/>
+   </widget>
+   <widget class="QMenu" name="menu_settings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="action_preferences"/>
+   </widget>
+   <widget class="QMenu" name="menu_help">
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="action_LightMap_Help"/>
+    <addaction name="separator"/>
+    <addaction name="action_About_LightMap"/>
+   </widget>
+   <addaction name="menu_file"/>
+   <addaction name="menu_settings"/>
+   <addaction name="menu_help"/>
+  </widget>
+  <widget class="QStatusBar" name="status_bar">
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="AlternateBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>246</red>
+         <green>246</green>
+         <blue>246</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="AlternateBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>246</red>
+         <green>246</green>
+         <blue>246</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>230</red>
+         <green>230</green>
+         <blue>230</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="AlternateBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>246</red>
+         <green>246</green>
+         <blue>246</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QStatusBar {
+	background: #e6e6e6;
+	border-top: 1px outset #686868;
+}</string>
+   </property>
+  </widget>
+  <action name="action_open_image">
+   <property name="text">
+    <string>Open Image</string>
+   </property>
+  </action>
+  <action name="action_quit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="action_hide_toolbar">
+   <property name="text">
+    <string>Hide Toolbar</string>
+   </property>
+  </action>
+  <action name="action_record_video">
+   <property name="text">
+    <string>Record Video</string>
+   </property>
+  </action>
+  <action name="action_stop_recording">
+   <property name="text">
+    <string>Stop Recording</string>
+   </property>
+  </action>
+  <action name="action_preferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="action_LightMap_Help">
+   <property name="text">
+    <string>LightMap Help</string>
+   </property>
+  </action>
+  <action name="action_About_LightMap">
+   <property name="text">
+    <string>About LightMap</string>
+   </property>
+  </action>
+  <action name="action_start_mapping">
+   <property name="text">
+    <string>Start Mapping</string>
+   </property>
+  </action>
+  <action name="action_stop_mapping">
+   <property name="text">
+    <string>Stop Mapping</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>double_spin_box_projector_height</tabstop>
+  <tabstop>combo_box_projector_height</tabstop>
+  <tabstop>double_spin_box_projector_to_screen</tabstop>
+  <tabstop>combo_box_projector_to_screen</tabstop>
+  <tabstop>double_spin_box_camera_height</tabstop>
+  <tabstop>combo_box_camera_height</tabstop>
+  <tabstop>double_spin_box_camera_to_screen</tabstop>
+  <tabstop>combo_box_camera_to_screen</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
