@@ -21,16 +21,16 @@ class Detector:
     #uses hough circle transform to detect circles
     def readFramesHough(self):
         
-        frame0 = self.myCam.getFrame()
+        self.frame0 = self.myCam.getFrame()
         
         #blur to enhance detection abilities
-        frame1 = cv2.medianBlur(frame0,5)
+        frame1 = cv2.medianBlur(self.frame0,5)
 
         #operations on frame come here
         frame1 = cv2.cvtColor(frame1, cv2.COLOR_RGB2GRAY)
         #hough circles needs images to be in grayscale
         circles = cv2.HoughCircles(frame1,cv2.HOUGH_GRADIENT,1,120,
-                            param1=100,param2=50,minRadius=50,maxRadius=200)
+                            param1=100,param2=50,minRadius=20,maxRadius=200)
            
             #if circles are not detected, this part is skipped. helps with
             #efficiency
@@ -42,7 +42,10 @@ class Detector:
         else:
             return (0,0,0)
 
-                
+    def getFrame(self):
+        
+        return self.frame0
+
     def stopRead(self):
         
         self.myCam.stopCam()
