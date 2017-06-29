@@ -7,33 +7,38 @@ Created on Mon Jun  5 23:19:05 2017
 """
 import ImageProcessing as ip
 import cv2
+import unittest
+from unittest.mock import MagicMock
+import numpy as np
 
-'''
-test_1 is a png 
-Desired output should be a square image with a circular colored area centered
-Output saved as "result0.0.png"
-
-test_2 is a six-frame gif
-Desired output should be six square images with a circular colored area centered
-Output saved as "result1.0.png", "result1.1.png", "result1.2.png",
-                "result1.3.png", "result1.4.png", "result1.5.png"
-'''
-
-def main():
-    images = []
-    images.append("test_1")
-    images.append("test_2")
-    
-    processing = ip.ImageProcessing()
-    
-    for i in range(len(images)):
+class FunctionalTestCase(unittest.TestCase):
+    def test_nonanimated_image(self):
+        filename = "test_1"
         
-        image = processing.image_processing(images[i])
+        obj = ip.ImageProcessing()
+        result = obj.image_processing(filename)
         
-        for j in range(len(image)):
-            cv2.imwrite("result{}.{}.png".format(i, j), image[j])
+        comparable = cv2.imread("test_1_unanimated_image_0.png", -1)
+        
+        state = np.all(comparable == result[0])
+        
+        self.assertTrue(state)
+        
+    def test_animated_image(self):
+        filename = "test_2"
+        
+        obj = ip.ImageProcessing()
+        result = obj.image_processing(filename)
+        
+        for i, res in enumerate(result):
+            with self.subTest(i=i):
+                comparable = cv2.imread("test_2_animated_image_{}.png".format(i), -1)
+                
+                state = np.all(comparable == res)
+                
+                self.assertTrue(state)
 
 if __name__ == "__main__":
-    main()
+    unittest.main()
     
     
