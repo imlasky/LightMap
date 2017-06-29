@@ -23,7 +23,7 @@ class NonanimatedTestCase(unittest.TestCase):
         
         obj = ip.ImageProcessing()
         
-        result = obj.add_alpha(input_image, 0)
+        result = obj.add_alpha(input_image)
         
         boolean = np.all(result == result_image)
         
@@ -37,7 +37,7 @@ class NonanimatedTestCase(unittest.TestCase):
         obj = ip.ImageProcessing()
         
         center = 240, 320
-        result = obj.trim_square(input_image, center, 240, 0)
+        result = obj.trim_square(input_image, center, 240)
         
         boolean = np.all(result == result_image)
         
@@ -55,7 +55,7 @@ class NonanimatedTestCase(unittest.TestCase):
         obj.find_min = MagicMock(return_value=0)
         obj.trim_square = MagicMock(return_value=trim_square_result)
         
-        result = obj.crop_circle(input_image, 0)
+        result = obj.crop_circle(input_image)
         
         boolean = np.all(result == result_image)
         
@@ -77,7 +77,7 @@ class NonanimatedTestCase(unittest.TestCase):
         add_alpha_result = cv2.imread("test_1_add_alpha_0.png", -1)
         obj.add_alpha = MagicMock(return_value=add_alpha_result)
         
-        result = obj.generate_circle(image, 0)
+        result = obj.generate_circle(image)
         
         boolean = np.all(result == result_image)
         
@@ -148,7 +148,7 @@ class AnimatedTestCase(unittest.TestCase):
         
                 obj = ip.ImageProcessing()
         
-                result = obj.add_alpha(input_image, i)
+                result = obj.add_alpha(input_image)
         
                 boolean = np.all(result == result_image)
         
@@ -164,7 +164,7 @@ class AnimatedTestCase(unittest.TestCase):
                 obj = ip.ImageProcessing()
                 
                 center = 106, 157
-                result = obj.trim_square(input_image, center, 106, i)
+                result = obj.trim_square(input_image, center, 106)
                 
                 boolean = np.all(result == result_image)
                 
@@ -184,7 +184,7 @@ class AnimatedTestCase(unittest.TestCase):
                 obj.find_min = MagicMock(return_value=0)
                 obj.trim_square = MagicMock(return_value=trim_square_result)
                 
-                result = obj.crop_circle(input_image, i)
+                result = obj.crop_circle(input_image)
                 
                 boolean = np.all(result == result_image)
                 
@@ -210,7 +210,7 @@ class AnimatedTestCase(unittest.TestCase):
                 image = cv2.imread("test_2_add_alpha_{}.png".format(i), -1)
                 obj.add_alpha = MagicMock(return_value=image)
         
-                frame = obj.generate_circle(frames, i)
+                frame = obj.generate_circle(frames)
         
                
        

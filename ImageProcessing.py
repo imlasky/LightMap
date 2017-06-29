@@ -42,21 +42,22 @@ class ImageProcessing():
         
         image.append(cv2.imread(self.filename, 1))
         
-        image = self.generate_circle(image,0)
+        image[0] = self.generate_circle(image[0])
     
         return image
             
     # Creates circular image with a transparent background
-    def generate_circle(self, image, frame_number):
+    def generate_circle(self, image):
 
-        image = self.crop_circle(image, frame_number)
+        image = self.crop_circle(image)
         
-        image = self.add_alpha(image, frame_number)
+        image = self.add_alpha(image)
            
         return image
 
     # outlines the largest, center circle in the image  
-    def crop_circle(self, image, frame_number):
+    def crop_circle(self, frame):
+        image = frame
         dimensions = self.get_size(image)
         index = self.find_min(dimensions[0], dimensions[1])
         
@@ -65,17 +66,16 @@ class ImageProcessing():
         
         circle = np.zeros(dimensions, np.uint8)
         
-        mask = cv2.circle(circle, (center[1], center[0]), radius, 1, thickness=-1)
+        cv2.circle(circle, (center[1], center[0]), radius, 1, thickness=-1)
         
-#        print(np.shape(image))
-        image = cv2.bitwise_and(image, image, mask)
+        image = cv2.bitwise_and(image, image, mask=circle)
         
-        image = self.trim_square(image, center, radius, frame_number)
+        image = self.trim_square(image, center, radius)
         
         return image
         
     # Crops the square surrounding the largest, centermost circle of the image 
-    def trim_square(self, image, center, radius, frame_number):
+    def trim_square(self, image, center, radius):
         image = image[(center[0] - radius):(center[0] + radius),
                       (center[1] - radius):(center[1] + radius)]
           
@@ -83,7 +83,7 @@ class ImageProcessing():
         
         
     # Adds alpha layer behind circle image
-    def add_alpha(self, image, frame_number):
+    def add_alpha(self, image):
         greyscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         _, alpha = cv2.threshold(greyscale, 0, 255, cv2.THRESH_BINARY)
         b, g, r = cv2.split(image)
@@ -104,7 +104,7 @@ class ImageProcessing():
             
     # Gets the dimensions of the input image
     def get_size(self, image):
-        size = np.shape(image[:,:,0:2])#image.shape[:2]
+        size = image.shape[:2]
         return size
  
     def animated_image(self):
@@ -113,9 +113,10 @@ class ImageProcessing():
         gif = Image.open(self.filename)
         
         gif_frames = self.gif_divorce(gif)
+        
 
-        for i in range(len(gif_frames)):    
-            image = self.generate_circle(gif_frames[i], i)
+        for frame in gif_frames:
+            image = self.generate_circle(frame)
             frames.append(image)
             
         return frames
