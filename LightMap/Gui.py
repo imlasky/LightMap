@@ -63,6 +63,7 @@ class GUI(QMainWindow):
 
         #Make sure this variable has been declared so that we can click on "Start Mapping" at any time.
         self.image_file_chosen = None
+        self.video_file_path = None
 
         #Handle the case that the user clicks on the "Start Mapping" button.
         main_window.button_mapping.clicked.connect(lambda: self.start_mapping(main_window))
