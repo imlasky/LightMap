@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import ImageProcessing as ip
 
-fname = "earth.jpg"
+fname = "../Images/Earth.jpg"
 
 myImage = ImageProcessing()
 

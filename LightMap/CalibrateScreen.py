@@ -40,7 +40,7 @@ class Calibrate:
             self.screen.fill((0,0,0))
             
             x_loc, y_loc, radius = self.detect.readFramesHough()
-            im = pygame.image.load('./Images/Calibration.png')
+            im = pygame.image.load('../Images/Calibration.png')
             im = pygame.transform.scale(im,(50,50))
             im_rect = im.get_rect()
             im_rect.centerx = int(w/2)

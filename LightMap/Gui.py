@@ -5,6 +5,7 @@
 '''
 
 #Standard imports.
+import os
 import sys
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
@@ -34,6 +35,7 @@ class GUI(QMainWindow):
         #Make the main window.
         self.init_main_window()
 
+    #Make the main window.
     def init_main_window(self):
         main_window = uic.loadUi("mainwindow.ui", self)
         self.setWindowIcon(self.window_icon)
@@ -48,7 +50,7 @@ class GUI(QMainWindow):
         self.command_help_menu(main_window)
 
         #Launch saved user preferences.
-
+        main_window
 
         #Handle the case that the user clicks on the "Open Image" button.
         main_window.button_open_image.clicked.connect(lambda: self.open_image_file(main_window))
@@ -60,13 +62,61 @@ class GUI(QMainWindow):
         main_window.check_box_record_video.toggled.connect(lambda: self.set_record_action(main_window, "checkbox"))
 
         #Make sure this variable has been declared so that we can click on "Start Mapping" at any time.
-        self.file_chosen = None
+        self.image_file_chosen = None
 
         #Handle the case that the user clicks on the "Start Mapping" button.
         main_window.button_mapping.clicked.connect(lambda: self.start_mapping(main_window))
 
         #Show the main window.
         self.show()
+
+    #Map the image to the ball.
+    def start_mapping(self, main_window):
+        #Check if the user has selected an image before sending the file path to the main program.
+        if not self.image_file_chosen:
+            QMessageBox.about(self, "No File Selected", "Please select a valid image file before mapping!")
+
+        #Check if the image file exists before sending the image file path to the main program.
+        elif not os.path.exists(self.image_file_chosen):
+            QMessageBox.about(self, "File Not Found", "The image file could not be found! Please select another image file!")
+
+        #Check if the user has entered valid input for the hardware position specifications.
+        elif main_window.double_spin_box_projector_height.value() == 0:
+            QMessageBox.about(self, "Invalid Projector Height", "Please enter a number greater than 0 for the height of the projector.")
+
+        elif main_window.double_spin_box_projector_to_screen.value() == 0:
+            QMessageBox.about(self, "Invalid Projector to Screen Distance", "Please enter a number greater than 0 for the distance from the projector to the screen.")
+
+        elif main_window.double_spin_box_camera_height.value() == 0:
+            QMessageBox.about(self, "Invalid Camera Height", "Please enter a number greater than 0 for the height of the camera.")
+
+        elif main_window.double_spin_box_camera_to_screen.value() == 0:
+            QMessageBox.about(self, "Invalid Camera Height", "Please enter a number greater than 0 for the distance from the camera to the screen.")
+
+        #Everything is good to go! Send the data to the rest of the program.
+        else:
+            #Index 0 stores the projector's height. Index 1 stores the distance from the projector to the screen.
+            #Index 2 stores the camera's height. Index 3 stores the distance from the camera to the screen.
+            hardware_positions = [None] * 4
+
+            #Convert the user input for hardware distance measurements to meters.
+            hardware_positions[0] = self.convert_to_meters(main_window.double_spin_box_projector_height.value(), main_window.combo_box_projector_height.currentIndex())
+            hardware_positions[1] = self.convert_to_meters(main_window.double_spin_box_projector_to_screen.value(), main_window.combo_box_projector_to_screen.currentIndex())
+            hardware_positions[2] = self.convert_to_meters(main_window.double_spin_box_camera_height.value(), main_window.combo_box_camera_height.currentIndex())
+            hardware_positions[3] = self.convert_to_meters(main_window.double_spin_box_camera_to_screen.value(), main_window.combo_box_camera_to_screen.currentIndex())
+
+            print(self.image_file_chosen)
+            print(hardware_positions)
+            print(self.video_file_path)
+
+            #Code for Gui.py to run as a standalone.
+            if __name__ != "__main__":
+                self.user_input.update_values(hardware_positions, self.image_file_chosen, self.video_file_path)
+                self.light_map.launch_app(self.user_input)
+
+    #Close the application when the main window is closed.
+    def closeEvent(self, event):
+        sys.exit()
 
     #Add commands for actions under the File menu.
     def command_file_menu(self, main_window):
@@ -125,36 +175,54 @@ class GUI(QMainWindow):
         #Convert from centimeters to meters.
         else: return value * 0.0100
 
-    #Display the file path of the chosen image file, or indicate that no file was chosen.
-    def display_file_path(self, window):
-        #Show the path of the file chosen.
-        if self.file_chosen:
-            #Find the length of the file path's string.
-            str_len = len(self.file_chosen)
+    #Display the file path of the chosen file, or indicate that no file was chosen.
+    def display_file_path(self, source, label, source_string):
+        #Determine if this method is relevant to the image file or video file.
+        if source is self.image_file_chosen:
+            max_len = 42
+            a = 23
+            b = 16
 
-            #If the length is longer than 41 characters, shorten the string of the file path to be displayed.
-            if str_len > 41:
-                #Show the first 22 characters, separate with an ellipsis, and append the last 16 characters.
+        elif source is self.video_file_path:
+            max_len = 34
+            a = 17
+            b = 14
+
+        #Show the path of the file chosen.
+        if source:
+            #Find the length of the file path's string.
+            str_len = len(source)
+
+            #If the length is longer than max_len characters, shorten the string of the file path to be displayed.
+            if str_len > max_len:
+                #Show the first a characters, separate with an ellipsis, and append the last b characters.
                 file_name = ""
 
-                for c in range(0, 23):
-                    file_name += self.file_chosen[c]
+                for c in range(0, a):
+                    file_name += source[c]
 
                 file_name += "..."
 
-                for c in range(str_len-16, str_len):
-                    file_name += self.file_chosen[c]
+                for c in range(str_len-b, str_len):
+                    file_name += source[c]
 
                 #Display the abbreviated string on the label.
-                window.label_file_name.setText(file_name)
+                label.setText(file_name)
+
+                #Set the tooltip on the label to display the full file path.
+                label.setToolTip(source)
 
             #Else the length of the file path string is not too long, so display the file path as is.
             else:
-                window.label_file_name.setText(self.file_chosen)
+                label.setText(source)
 
-        #Inform the user that no image file was chosen.
+        #Inform the user that a file could not be chosen.
         else:
-            window.label_file_name.setText("No image was selected. Please select an image.")
+            if source_string is "image":
+                label.setText("No image was selected. Please select an image.")
+
+            elif source_string is "video":
+                label.setText("The folder or file name was not specified.")
 
     #Display status tips for all clickable widgets from the main window except for the menu.
     def display_status(self, main_window):
@@ -196,11 +264,11 @@ class GUI(QMainWindow):
     #Open an image file.
     def open_image_file(self, window):
         #Open the file dialog to select an image file.
-        self.file_chosen, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
+        self.image_file_chosen, _ = QFileDialog.getOpenFileName(self, "Open Image", "",
             "JPEG (*.JPEG *.jpeg *.JPG *.jpg *.JPE *.jpe *JFIF *.jfif);; PNG (*.PNG *.png);; GIF (*.GIF *.gif);; Bitmap Files (*.BMP *.bmp *.DIB *.dib);; TIFF (*.TIF *.tif *.TIFF *.tiff);; ICO (*.ICO *.ico)")
         
         #Display the file path of the chosen image file, or indicate that no file was chosen.
-        GUI.display_file_path(self, window)
+        GUI.display_file_path(self, self.image_file_chosen, window.label_image_file_name, "image")
 
     #Select the default image that was chosen by the user.
     def select_default_image(self, main_window, button_default):
@@ -219,34 +287,36 @@ class GUI(QMainWindow):
             file_name = "Mystery_Image.jpg"
 
         #Show the image file name.
-        main_window.label_file_name.setText(file_name)
+        main_window.label_image_file_name.setText(file_name)
 
         #Provide relative pathing to send back to the main program. All images are in the Images folder.
         if button_default is not main_window.button_default_image6:
-            self.file_chosen = "../Images/"
-            self.file_chosen += file_name
+            self.image_file_chosen = "../Images/"
+            self.image_file_chosen += file_name
         else:
-            self.file_chosen = "../Images/Mystery_Man.jpg"
+            self.image_file_chosen = "../Images/Mystery_Man.jpg"
 
 
     #Link the record option from the menu to the record checkbox on the main window.
-    def set_record_action(self, main_window, source):
+    def set_record_action(self, main_window, event_source):
         #Handle the case that the user selected from the menu.
-        if source == "menu":
+        if event_source == "menu":
             if main_window.check_box_record_video.isChecked() == True:
                 main_window.check_box_record_video.setChecked(False)
                 main_window.check_box_record_video.setStatusTip("Record Video")
                 main_window.action_record_video.setText("Record Video")
                 main_window.action_record_video.setStatusTip("Record Video")
+                main_window.label_video_file_path.setText("Video recording has been canceled.")
+                self.video_file_path = None
             else:
                 main_window.check_box_record_video.setChecked(True)
                 main_window.check_box_record_video.setStatusTip("Stop Recording")
                 main_window.action_record_video.setText("Stop Recording")
                 main_window.action_record_video.setStatusTip("Stop Recording")
 
-        #Handle the case that the user directly clicked on the checkbox. Note that the status of the checkbox is checked after
+        #Handle the case that the user directly clicked on the checkbox. Note that the status of the checkbox is assessed after
         #the checkbox has been manually toggled, so everything below here is the inverse of the above.
-        elif source == "checkbox":
+        elif event_source == "checkbox":
             if main_window.check_box_record_video.isChecked() == True:
                 main_window.check_box_record_video.setStatusTip("Stop Recording")
                 main_window.action_record_video.setText("Stop Recording")
@@ -255,53 +325,33 @@ class GUI(QMainWindow):
                 main_window.check_box_record_video.setStatusTip("Record Video")
                 main_window.action_record_video.setText("Record Video")
                 main_window.action_record_video.setStatusTip("Record Video")
+                main_window.label_video_file_path.setText("Video recording has been canceled.")
+                self.video_file_path = None
 
-    #Map the image to the ball.
-    def start_mapping(self, main_window):
-        #Check if the user has selected an image before sending the file path to the main program.
-        if not self.file_chosen:
-            QMessageBox.about(self, "No File Selected", "Please select a valid image file before mapping!")
+        #------------------------------------------------------------------------
 
-        #Check if the user has entered valid input for the hardware position specifications.
-        elif main_window.double_spin_box_projector_height.value() == 0:
-            QMessageBox.about(self, "Invalid Projector Height", "Please enter a number greater than 0 for the height of the projector.")
+        #If the string stays None, then the user chose not to record a video.
+        self.video_file_path = None
 
-        elif main_window.double_spin_box_projector_to_screen.value() == 0:
-            QMessageBox.about(self, "Invalid Projector to Screen Distance", "Please enter a number greater than 0 for the distance from the projector to the screen.")
+        #If the user has chosen to record a video, then ask the user to determine the name of the video file as well as the target directory.
+        if main_window.check_box_record_video.isChecked() is True:
+            self.video_file_path, _ = QFileDialog.getSaveFileName(self, "Save Video", "*.avi", "AVI (*.avi *.AVI)")
 
-        elif main_window.double_spin_box_camera_height.value() == 0:
-            QMessageBox.about(self, "Invalid Camera Height", "Please enter a number greater than 0 for the height of the camera.")
+            #If the user did not choose to save a video, then uncheck the "Record Video" checkbox and update the menu option.
+            if not self.video_file_path:
+                main_window.check_box_record_video.setChecked(False)
+                main_window.check_box_record_video.setStatusTip("Record Video")
+                main_window.action_record_video.setText("Record Video")
+                main_window.action_record_video.setStatusTip("Record Video")
 
-        elif main_window.double_spin_box_camera_to_screen.value() == 0:
-            QMessageBox.about(self, "Invalid Camera Height", "Please enter a number greater than 0 for the distance from the camera to the screen.")
+            else:
+                main_window.check_box_record_video.setStatusTip("Stop Recording")
+                main_window.action_record_video.setText("Stop Recording")
+                main_window.action_record_video.setStatusTip("Stop Recording")
 
-        #Everything is good to go! Send the data to the rest of the program.
-        else:
-            #Index 0 stores the projector's height. Index 1 stores the distance from the projector to the screen.
-            #Index 2 stores the camera's height. Index 3 stores the distance from the camera to the screen.
-            hardware_positions = [None] * 4
 
-            #Convert the user input for hardware distance measurements to meters.
-            hardware_positions[0] = self.convert_to_meters(main_window.double_spin_box_projector_height.value(), main_window.combo_box_projector_height.currentIndex())
-            hardware_positions[1] = self.convert_to_meters(main_window.double_spin_box_projector_to_screen.value(), main_window.combo_box_projector_to_screen.currentIndex())
-            hardware_positions[2] = self.convert_to_meters(main_window.double_spin_box_camera_height.value(), main_window.combo_box_camera_height.currentIndex())
-            hardware_positions[3] = self.convert_to_meters(main_window.double_spin_box_camera_to_screen.value(), main_window.combo_box_camera_to_screen.currentIndex())
-
-            #Pass the array containing the hardware distance measurements.
-            print(hardware_positions)
-
-            #Pass the file path of the image chosen.
-            print(self.file_chosen)
-
-            #If the user has chosen to record a video, call the video recording function.
-            if main_window.check_box_record_video.isChecked() is True:
-                print("Record Video")
-
-            #Code for Gui.py to run as a standalone.
-            if __name__ != "__main__":
-                record_video = main_window.check_box_record_video.isChecked()
-                self.user_input.update_values(hardware_positions, self.file_chosen, record_video)
-                self.light_map.launch_app(self.user_input)
+            #On the GUI, indicate whether the user has determined the target directory and name of the video file.
+            self.display_file_path(self.video_file_path, main_window.label_video_file_path, "video")
 
 
 class PreferencesWindow(QDialog):
@@ -309,8 +359,8 @@ class PreferencesWindow(QDialog):
         super().__init__()
 
         self.window_icon = QIcon("../Images/LightMap.png")
-        self.width = 380
-        self.height = 420
+        self.width = 385
+        self.height = 450
 
         self.init_preferences_window()
 
@@ -321,6 +371,8 @@ class PreferencesWindow(QDialog):
 
         #Handle the case that the user clicks on the "Open Image" button.
         preferences_window.button_open_image.clicked.connect(lambda: GUI.open_image_file(self, preferences_window))
+
+        #Handle the case that the user clicks on the "Always record video" checkbox.
 
         #Handle the case that the user clicks on the "Save" button.
         preferences_window.button_box.buttons()[0].clicked.connect(lambda: self.save_preferences(preferences_window))
