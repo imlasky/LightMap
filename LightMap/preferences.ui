@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>384</width>
-    <height>450</height>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -121,7 +121,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_file_name">
+      <widget class="QLabel" name="label_image_file_name">
        <property name="palette">
         <palette>
          <active>
@@ -414,6 +414,19 @@
          </item>
         </widget>
        </item>
+       <item>
+        <spacer name="vertical_spacer_units">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item>
@@ -463,6 +476,67 @@
       <string>Always record video</string>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontal_layout_default_video">
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Set default video file name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>177</red>
+             <green>5</green>
+             <blue>5</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>177</red>
+             <green>5</green>
+             <blue>5</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>120</red>
+             <green>120</green>
+             <blue>120</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="text">
+        <string>No default video file name</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontal_layout_presets">

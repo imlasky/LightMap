@@ -113,7 +113,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_file_name">
+           <widget class="QLabel" name="label_image_file_name">
             <property name="palette">
              <palette>
               <active>
@@ -644,6 +644,50 @@ QPushButton:checked {
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_video_file_path">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>5</green>
+                  <blue>5</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>177</red>
+                  <green>5</green>
+                  <blue>5</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="text">
+             <string>No Video File Name Set</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="check_box_record_video">
