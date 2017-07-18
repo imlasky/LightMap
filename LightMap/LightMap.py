@@ -39,7 +39,6 @@ class LightMap():
 
         self.processed_images = self.images.image_processing(user_input.filepath)
 
-        self.offset_x, self.offset_y = self.calib.getOffsets()
 
         for i in range(0,len(self.processed_images)):
             
@@ -52,6 +51,10 @@ class LightMap():
             frame = frame % len(self.processed_images)
             
             x_loc, y_loc, radius = self.detect.readFramesHough()
+            
+            self.offset_x, self.offset_y = self.calib.getOffsets(x_loc,y_loc)
+
+            
             
 #            if user_input.record_video:
 #                self.video.record_frame(self.detect.getFrame())

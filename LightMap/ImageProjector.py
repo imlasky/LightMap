@@ -33,7 +33,9 @@ class ImageProjector:
         im_rect = image2.get_rect()
     
         #place image at new location
-        self.screen.blit(image2,(int(x-im_rect.width/2),int(y - im_rect.height/2)))
+        if im_rect.width and im_rect.height:
+            print(x-im_rect.width/2)
+            self.screen.blit(image2,(int(x-im_rect.width/2),int(y - im_rect.height/2)))
     
         #Updates the display
         pygame.display.flip()
