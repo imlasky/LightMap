@@ -38,7 +38,7 @@ class GUI(QMainWindow):
     def init_main_window(self):
         main_window = uic.loadUi("mainwindow.ui", self)
         self.setWindowIcon(self.window_icon)
-        main_window.setFixedSize(self.width, self.height)
+        main_window.resize(self.width, self.height)
 
         #Add commands for actions under the submenus.
         self.command_file_menu(main_window)
@@ -298,7 +298,7 @@ class GUI(QMainWindow):
 
             #Code for Gui.py to run as a standalone.
             if __name__ != "__main__":
-                self.user_input.update_values(hardware_positions, self.image_file_chosen, self.video_file_path)
+                self.user_input.update_values(self.image_file_chosen, self.video_file_path)
                 self.light_map.launch_app(self.user_input)
 
 #DEBUG: DELETE LATER
