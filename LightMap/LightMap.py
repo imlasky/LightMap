@@ -54,12 +54,13 @@ class LightMap():
             
             self.offset_x, self.offset_y = self.calib.getOffsets(x_loc,y_loc)
 
-            
+            #print(str(x_loc) + "**" + str(self.offset_x))
             
 #            if user_input.record_video:
 #                self.video.record_frame(self.detect.getFrame())
         
-            self.project.projectImage(self.processed_surface[frame],(x_loc+self.offset_x),(y_loc+self.offset_y),radius)
+            print(self.offset_x)
+            self.project.projectImage(self.processed_surface[frame],(self.offset_x),(self.offset_y),radius)
             
             frame += 1
             flags = self.project.event()

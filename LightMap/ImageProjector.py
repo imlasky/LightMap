@@ -15,7 +15,8 @@ class ImageProjector:
     def __init__(self):
         
         pygame.init()
-        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        #self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((1280,960))
         self.myKc = kc.KeyController(self.screen)
     
     def projectImage(self,image,x,y,r):   
@@ -33,9 +34,11 @@ class ImageProjector:
         im_rect = image2.get_rect()
     
         #place image at new location
-        if im_rect.width and im_rect.height:
-            print(x-im_rect.width/2)
+        try:         
             self.screen.blit(image2,(int(x-im_rect.width/2),int(y - im_rect.height/2)))
+            
+        except ValueError:
+            pass
     
         #Updates the display
         pygame.display.flip()
