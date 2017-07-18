@@ -7,11 +7,7 @@ Created on Thu Jun 15 15:32:32 2017
 
 class InputValues:
     def __init__(self):
-        self.projector_height = -1.0
-        self.projector_distance = -1.0
         
-        self.camera_height = -1.0
-        self.camera_distance = -1.0
         
         self.filepath = ""
         
@@ -22,13 +18,9 @@ class InputValues:
         
         
         
-    def update_values(self, hardware_positions, filepath, record_video):
+    def update_values(self, filepath, record_video):
         
-        self.projector_height = hardware_positions[0]
-        self.projector_distance = hardware_positions[1]
-        
-        self.camera_height = hardware_positions[2]
-        self.camera_distance = hardware_positions[3]
+
         
         self.filepath = filepath
         
