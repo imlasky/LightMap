@@ -29,7 +29,8 @@ class LightMap():
         
     def launch_app(self, user_input):
         self.calib = cs.Calibrate()
-        self.detect = Detector.Detector()
+        #self.detect = Detector.Detector()
+        self.track = Tracker.Tracker()
         self.processed_surface = []
         self.project = impr.ImageProjector()
         self.video = vr.VideoRecorder('output.avi')
@@ -39,7 +40,6 @@ class LightMap():
 
         self.processed_images = self.images.image_processing(user_input.filepath)
 
-        self.offset_x, self.offset_y = self.calib.getOffsets()
 
         for i in range(0,len(self.processed_images)):
             
@@ -51,7 +51,12 @@ class LightMap():
         while True:
             frame = frame % len(self.processed_images)
             
-            x_loc, y_loc, radius = self.detect.readFramesHough()
+            #x_loc, y_loc, radius = self.detect.readFramesHough()
+            x_loc, y_loc, radius = self.track.getCoordintes()
+            
+            self.offset_x, self.offset_y = self.calib.getOffsets(x_loc,y_loc)
+
+            
             
 #            if user_input.record_video:
 #                self.video.record_frame(self.detect.getFrame())

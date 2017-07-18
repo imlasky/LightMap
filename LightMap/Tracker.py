@@ -30,7 +30,7 @@ class Detector:
         ret, self.bbox = self.tracker.update(frame)
         
         return (self.bbox[0], self.bbox[1], self.bbox[2]/2)
-        #return x, y r
+        #return x, y, r
 
     def getFrame(self):
         
