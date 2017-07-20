@@ -23,8 +23,8 @@ class Calibrate:
         self.coords_ind = 0
         self.x_locs = []
         self.y_locs = []
-#        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
-        self.screen = pygame.display.set_mode((600,400))
+        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        #self.screen = pygame.display.set_mode((600,400))
         self.myKc = kc.KeyController(self.screen)
         self.detect = Detector.Detector()
         self.__calibrate()
@@ -40,13 +40,14 @@ class Calibrate:
         w, h = self.screen.get_size()
         
         circ_rad = 75
-        num_points = 50
+        num_points = 25
         
     
         self.screen_width_space = np.linspace(circ_rad,w-circ_rad,num_points,dtype=np.uint16)
         self.screen_height_space = np.linspace(circ_rad,h-circ_rad,num_points,dtype=np.uint16)
         
-        
+        down_right_complete = 0
+        up_left_complete = 0
         
         
 
@@ -56,8 +57,12 @@ class Calibrate:
             
             self.screen.fill((0,0,0))
             
-            pygame.draw.circle(self.screen,(255,0,0),(self.screen_width_space[i],
-                               self.screen_height_space[i]),circ_rad,5)
+            #if not down_right_complete:
+            pygame.draw.circle(self.screen,(255,255,255),(self.screen_width_space[i],
+                               self.screen_height_space[i]),circ_rad,10)
+            #else:
+             #   pygame.draw.circle(self.screen,(255,255,255),(self.screen_width_space[i],
+              #                 self.screen_height_space[num_points-i -1]),circ_rad,10)
             pygame.display.flip()
             x_loc, y_loc, radius = self.detect.readFramesHough()
             
@@ -65,20 +70,28 @@ class Calibrate:
                 self.x_locs.append(x_loc)
                 self.y_locs.append(y_loc)
                 print(x_loc,y_loc)
-                flags = self.myKc.check_keys()
                 self.radius = radius
-                i += 1    
-
+                i += 1 
+            
+            time.sleep(0.6)       
+            flags = self.myKc.check_keys()
             if flags[0] or i >= len(self.screen_width_space):
-                self.detect.stopRead()
-                pygame.display.quit()
-                pygame.quit()
                 break
             
-            time.sleep(0.2)
+            #if i >= len(self.screen_width_space) and not down_right_complete:
+             #   down_right_complete = 1
+              #  i = 0
+               # continue
+                
+            #if i >= len(self.screen_width_space) and not up_left_complete:
+             #   up_left_complete = 1
+              #  time.sleep(0.6)
+               # break
             
-        
             
+        #self.screen_width_space = np.concatenate([self.screen_width_space,self.screen_width_space])
+        #self.screen_height_space = np.concatenate([self.screen_height_space,self.screen_height_space[::-1]])
+  
         self.detect.stopRead()
         self.__interp(circ_rad)
         pygame.display.quit()
@@ -101,6 +114,7 @@ class Calibrate:
     
     def getRadius(self,radiusold):
         
-        return radiusold/self.radius_ratio
+        #return radiusold/self.radius_ratio
+        return 6*radiusold
             
             
