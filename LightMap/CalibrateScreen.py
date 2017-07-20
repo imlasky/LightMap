@@ -64,12 +64,15 @@ class Calibrate:
             i += 1    
 
             if flags[0] or i >= len(self.screen_width_space):
+                self.radius = radius
                 self.detect.stopRead()
                 pygame.display.quit()
                 pygame.quit()
                 break
             
             time.sleep(0.2)
+            
+        
             
         self.detect.stopRead()
         self.__interp()
@@ -78,6 +81,8 @@ class Calibrate:
 
         
     def __interp(self):
+        
+        self.radius_ratio = self.radius/50
         
         self.fx = interp1d(self.x_locs,self.screen_width_space,bounds_error=False,
                            fill_value=0)
