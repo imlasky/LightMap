@@ -29,7 +29,7 @@ class ImageProjector:
         image = pygame.transform.rotate(image.copy(),-90)
         image = pygame.transform.flip(image.copy(),True,False)
     
-        image2 = pygame.transform.scale(image.copy(),(2*r,2*r))
+#        image2 = pygame.transform.scale(image.copy(),(2*r,2*r))
             
         im_rect = image2.get_rect()
     
