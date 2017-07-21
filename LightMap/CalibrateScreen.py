@@ -11,6 +11,7 @@ import numpy as np
 import pygame
 import KeyController as kc
 import Detector
+import time
 from scipy.interpolate import interp1d
 
 class Calibrate:
@@ -20,15 +21,12 @@ class Calibrate:
         self.x_offset = 0
         self.y_offset = 0
         self.coords_ind = 0
-        self.x_offsets = []
-        self.y_offsets = []
-        self.xlocs = []
-        self.ylocs = []
-        #self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
-        self.screen = pygame.display.set_mode((1280,960))
+        self.x_locs = []
+        self.y_locs = []
+        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        #self.screen = pygame.display.set_mode((600,400))
         self.myKc = kc.KeyController(self.screen)
         self.detect = Detector.Detector()
-        
         self.__calibrate()
         
         
@@ -40,96 +38,97 @@ class Calibrate:
         pygame.mouse.set_visible(False)
         
         w, h = self.screen.get_size()
-        self.w = w
-        self.h = h
         
-        x_loc, y_loc, radius = self.detect.readFramesHough()
+        circ_rad = 75
+        num_points = 25
         
+    
+        self.screen_width_space = np.linspace(circ_rad,w-circ_rad,num_points,dtype=np.uint16)
+        self.screen_height_space = np.linspace(circ_rad,h-circ_rad,num_points,dtype=np.uint16)
+>>>>>>> calib
+        
+        down_right_complete = 0
+        up_left_complete = 0
         
         frame = self.detect.getFrame()
         
-        self.coords = np.array([[int(w/2),int(h/2)],[int(w/4),int(h/2)],[int(w/2),int(3*h/4)],
-                   [int(3*w/4),int(h/2)],[w,int(h/2)],[int(w/2),h],[0,int(h/2)],[int(w/2),0]])
         
         w2, h2, _ = np.shape(frame)
         self.w2 = w2
         self.h2 = h2
         
-        self.coords2 = np.array([[int(w2/2),int(h2/2)],[int(w2/4),int(h2/2)],[int(w2/2),int(3*h2/4)],
-                   [int(3*w2/4),int(h2/2)],[w2,int(h2/2)],[int(w2/2),h2],[0,int(h2/2)]])     
 
+        i = 0
         while True:
         
             
-            #start with a black screen
             self.screen.fill((0,0,0))
-        
-            x_loc, y_loc, radius = self.detect.readFramesHough()
-            
-            
-            im = pygame.image.load('../Images/Calibration.png')
-            im = pygame.transform.scale(im,(50,50))
-            im_rect = im.get_rect()
-            im_rect.centerx = int(w/2)
-            im_rect.centery = int(h/2)
-            
-            if im_rect:
-                self.screen.blit(im,((self.coords[self.coords_ind,0]-int(im_rect.width/2)),self.coords[self.coords_ind,1]-int(im_rect.height/2)))
-                if radius > 0:
-                    pygame.draw.circle(self.screen,(255,255,0),(self.coords[self.coords_ind,0],self.coords[self.coords_ind,1]),radius,1)
-            
             pygame.display.flip()
+            x_loc, y_loc, radius = self.detect.readFramesHough()
+>>>>>>> calib
+            
+            if radius > 0:
+                self.x_locs.append(x_loc)
+                self.y_locs.append(y_loc)
+                print(x_loc,y_loc)
+                self.radius = radius
+                i += 1 
+            
+            time.sleep(0.6)       
             flags = self.myKc.check_keys()
-            if flags[1] and radius > 0:
-                if self.coords_ind == 3:
-                    self.xlocs.append(x_loc)
-                    self.ylocs.append(y_loc)
-                    self.x_offsets.append(self.coords2[self.coords_ind,0] - x_loc)
-                    self.y_offsets.append(self.coords2[self.coords_ind,1] - y_loc)
-                    break
-                self.xlocs.append(x_loc)
-                self.ylocs.append(y_loc)
-                self.x_offsets.append(self.coords2[self.coords_ind,0] - x_loc)
-                self.y_offsets.append(self.coords2[self.coords_ind,1] - y_loc)
-                self.coords_ind += 1
-            if flags[0]:
-                self.detect.stopRead()
-                pygame.display.quit()
-                pygame.quit()
-                return
 
-        self.xlocs.append(self.w2)
-        self.ylocs.append(int(self.h2/2))
-        self.xlocs.append(int(self.w2/2))
-        self.ylocs.append(self.h2)
-        self.xlocs.append(0)
-        self.ylocs.append(int(self.h2/2))
-        self.xlocs.append(int(self.w2/2))
-        self.ylocs.append(0)
-
+=======
+            if flags[0] or i >= len(self.screen_width_space):
+                break
+            
+            #if i >= len(self.screen_width_space) and not down_right_complete:
+             #   down_right_complete = 1
+              #  i = 0
+               # continue
+                
+            #if i >= len(self.screen_width_space) and not up_left_complete:
+             #   up_left_complete = 1
+              #  time.sleep(0.6)
+               # break
+            
+            
+        #self.screen_width_space = np.concatenate([self.screen_width_space,self.screen_width_space])
+        #self.screen_height_space = np.concatenate([self.screen_height_space,self.screen_height_space[::-1]])
+  
+>>>>>>> calib
         self.detect.stopRead()
-        self.__interp()
+        self.__interp(circ_rad)
         pygame.display.quit()
         pygame.quit()
+
         
+    def __interp(self,rad):
+        
+<<<<<<< HEAD
     def __interp(self):
     
 
         
-        #self.fx = interp1d(self.coords2[:,0]+self.x_offset,self.coords[:,0],bounds_error=False, fill_value=int(self.w/2))
+        self.radius_ratio = self.radius/rad
         
-        #self.fy = interp1d(self.coords2[:,1]+self.y_offset,self.coords[:,1],bounds_error=False, fill_value=int(self.h/2))
+        self.fx = interp1d(self.x_locs,self.screen_width_space,bounds_error=False,
+                           fill_value=0)
         
-        self.fx = interp1d(self.xlocs,self.coords[:,0],bounds_error=False,fill_value=int(self.w/2))
-        self.fy = interp1d(self.ylocs,self.coords[:,1],bounds_error=False,fill_value=int(self.h/2))
-            
-        print('Width: ' + str(self.w) + ' Height: ' + str(self.h))               
-        print(str(self.coords2[:,0]))
-        print(self.w2)
-        
+        self.fy = interp1d(self.y_locs,self.screen_height_space,bounds_error=False,
+                           fill_value=0)
+>>>>>>> calib
         
     def getOffsets(self,xold,yold):
         
         return self.fx(xold), self.fy(yold)
+    
+    def getRadius(self,radiusold):
+        
+        #return radiusold/self.radius_ratio
+        return 6*radiusold
             
             
+<<<<<<< HEAD
+            
+=======
+>>>>>>> calib
