@@ -46,16 +46,10 @@ class Calibrate:
         self.screen_width_space = np.linspace(circ_rad,w-circ_rad,num_points,dtype=np.uint16)
         self.screen_height_space = np.linspace(circ_rad,h-circ_rad,num_points,dtype=np.uint16)
 
+
+
         
-        down_right_complete = 0
-        up_left_complete = 0
-        
-        frame = self.detect.getFrame()
-        
-        
-        w2, h2, _ = np.shape(frame)
-        self.w2 = w2
-        self.h2 = h2
+
         
 
         i = 0
@@ -80,20 +74,7 @@ class Calibrate:
 
             if flags[0] or i >= len(self.screen_width_space):
                 break
-            
-            #if i >= len(self.screen_width_space) and not down_right_complete:
-             #   down_right_complete = 1
-              #  i = 0
-               # continue
-                
-            #if i >= len(self.screen_width_space) and not up_left_complete:
-             #   up_left_complete = 1
-              #  time.sleep(0.6)
-               # break
-            
-            
-        #self.screen_width_space = np.concatenate([self.screen_width_space,self.screen_width_space])
-        #self.screen_height_space = np.concatenate([self.screen_height_space,self.screen_height_space[::-1]])
+        
   
 
         self.detect.stopRead()
@@ -105,7 +86,7 @@ class Calibrate:
     def __interp(self,rad):
         
 
-    def __interp(self):
+
     
 
         
