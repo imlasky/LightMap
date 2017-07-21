@@ -6,7 +6,6 @@
 '''
 
 import pygame
-import sys
 from pygame.locals import *
 import KeyController as kc
 
@@ -15,11 +14,10 @@ class ImageProjector:
     def __init__(self):
         
         pygame.init()
-        #self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
         self.screen = pygame.display.set_mode((1280,960))
-        self.myKc = kc.KeyController(self.screen)
+        self.key_controller = kc.KeyController(self.screen)
     
-    def projectImage(self,image,x,y,r):   
+    def project_image(self,image,x,y,r):   
     
         #fill background with in black
         self.screen.fill((0,0,0))
@@ -29,10 +27,10 @@ class ImageProjector:
         image = pygame.transform.rotate(image.copy(),-90)
         image = pygame.transform.flip(image.copy(),True,False)
     
-        image2 = pygame.transform.scale(image.copy(),(2*r,2*r))
+        image2 = pygame.transform.scale(image.copy(),(r,r))
             
         im_rect = image2.get_rect()
-    
+            
         #place image at new location
         try:         
             self.screen.blit(image2,(int(x-im_rect.width/2),int(y - im_rect.height/2)))
@@ -45,23 +43,10 @@ class ImageProjector:
     
     def event(self):
         
-        flags = self.myKc.check_keys()
+        flags = self.key_controller.check_keys()
         return flags
-#        self.events = pygame.event.get()
-#        for event in events:
-#            if event.type == KEYUP:
-#                if event.key == pygame.K_q:
-#                    return True
-#                elif event.key == pygame.K_x:
-#                    return True
-#                elif event.key == pygame.K_ESCAPE:
-#                    return True
-#            elif event.type == QUIT:
-#                return True
-#            else:
-#                return False
-            
-    def stopProjecting(self):
+        
+    def stop_projecting(self):
         
         pygame.display.quit()
         pygame.quit()

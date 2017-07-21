@@ -6,22 +6,19 @@ from WebcamInit import *
 #There is room to implement techniques other than or in addition to detection
 #note that there is a difference between detection and tracking
 class Detector:
-    #initializes x and y values to be referenced to by other classes
-
     
+    #initializes x and y values to be referenced to by other classes
     #init uses all other functions to continuously compute current x and y
     def __init__(self):
-        #readFramesHough function passes in self and the capture from
-        #startCamera
-        self.myCam = WebcamInit()
+        self.my_camera = WebcamInit()
         self.x = 0
         self.y = 0
         self.radius = 0
         
     #uses hough circle transform to detect circles
-    def readFramesHough(self):
+    def read_frames_hough(self):
         
-        self.frame0 = self.myCam.getFrame()
+        self.frame0 = self.my_camera.getFrame()
         
         #blur to enhance detection abilities
         frame1 = cv2.medianBlur(self.frame0,5)
@@ -32,8 +29,7 @@ class Detector:
         circles = cv2.HoughCircles(frame1,cv2.HOUGH_GRADIENT,1,120,
                             param1=100,param2=50,minRadius=20,maxRadius=200)
            
-            #if circles are not detected, this part is skipped. helps with
-            #efficiency
+        #if circles are not detected, this is skipped. helps with efficiency
         if circles is not None:
             circles = np.uint16(np.around(circles))
             #draws circles
@@ -42,12 +38,12 @@ class Detector:
         else:
             return (0,0,0)
 
-    def getFrame(self):
+    def get_frame(self):
         
         return self.frame0
 
-    def stopRead(self):
+    def stop_read(self):
         
-        self.myCam.stopCam()
+        self.my_camera.stopCam()
     
 

@@ -2,7 +2,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import cv2
 import numpy as np
 import sys
 from PyQt5.QtWidgets import *
@@ -10,29 +9,22 @@ import Gui as g
 
 if __name__ != "__main__":
     import ImageProcessing as ip
-    import DistortImage as di
     import Detector
     import ImageProjector as impr
-    import VideoRecorder as vr
     import ConvertImage as ci
-    import KeyController as kc
     import CalibrateScreen as cs
-    
-    
-
-
     
 class LightMap():   
     def __init__(self):
         self.images = ip.ImageProcessing()
-        self.image_surf = ci.ConvertPicture()
+        self.image_surface = ci.ConvertImage()
         
     def launch_app(self, user_input):
-        self.calib = cs.Calibrate()
-        self.detect = Detector.Detector()
+        self.calibration = cs.Calibrate()
+        self.detector = Detector.Detector()
         self.processed_surface = []
-        self.project = impr.ImageProjector()
-        self.video = vr.VideoRecorder('output.avi')
+        self.radii = []
+        self.image_projector = impr.ImageProjector()
         self.offset_x = 0
         self.offset_y = 0
 
@@ -42,34 +34,44 @@ class LightMap():
 
         for i in range(0,len(self.processed_images)):
             
-            self.processed_images[i] = self.image_surf.convertColor(self.processed_images[i].copy()[:,:,0:3])
-            self.processed_surface.append(self.image_surf.convertToSurface(self.processed_images[i][:,:,0:3]))
+            self.processed_images[i] = self.image_surface.convert_color(self.processed_images[i].copy()[:,:,0:3])
+            self.processed_surface.append(self.image_surface.convert_to_surface(self.processed_images[i][:,:,0:3]))
         
-        frame = 0
-
+        frame_number = 0
+        radius_index = 0
+        
+        
         while True:
-            frame = frame % len(self.processed_images)
-            
-            x_loc, y_loc, radius = self.detect.readFramesHough()
-            
-            self.offset_x, self.offset_y = self.calib.getOffsets(x_loc,y_loc)
-
-            #print(str(x_loc) + "**" + str(self.offset_x))
-            
-#            if user_input.record_video:
-#                self.video.record_frame(self.detect.getFrame())
         
-            print(self.offset_x)
-            self.project.projectImage(self.processed_surface[frame],(self.offset_x),(self.offset_y),radius)
+            radius_index %= 10
+            frame_number = frame_number % len(self.processed_images)
             
-            frame += 1
-            flags = self.project.event()
+            x_loc, y_loc, radius = self.detector.read_frames_hough()
+            
+            if len(self.radii) < 10:
+                self.radii.append(radius)
+            else:
+                self.radii[radius_index] = radius
+                
+            new_radius = np.average(self.radii)
+            
+            self.offset_x, self.offset_y = self.calibration.get_offsets(x_loc,y_loc)
+            self.radius = self.calibration.get_radius(new_radius)
+
+            
+            
+#           
+            self.image_projector.project_image(self.processed_surface[frame_number],self.offset_x-375,self.offset_y-185,int(self.radius))
+            
+            frame_number += 1
+            radius_index += 1
+            flags = self.image_projector.event()
             
             if flags[0]:
                 break
         
-        self.project.stopProjecting()
-        self.detect.stopRead()
+        self.image_projector.stop_projecting()
+        self.detector.stop_read()
   
         
         

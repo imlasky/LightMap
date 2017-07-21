@@ -38,7 +38,7 @@ class GUI(QMainWindow):
     def init_main_window(self):
         main_window = uic.loadUi("mainwindow.ui", self)
         self.setWindowIcon(self.window_icon)
-        main_window.setFixedSize(self.width, self.height)
+        main_window.resize(self.width, self.height)
 
         #Add commands for actions under the submenus.
         self.command_file_menu(main_window)
@@ -55,14 +55,11 @@ class GUI(QMainWindow):
 
     #Add functionality to widgets on the main window.
     def add_main_functionality(self, main_window):
-        #Make sure this variable has been declared so that we can click on "Start Mapping" at any time.
-        self.image_file_chosen = None
-
         #If the string stays None, then the user chose not to record a video.
         self.video_file_path = None
 
-        #If this boolean is true, check the status of the video recording checkbox whenever it changes.
-        self.check_status_vr_check_box = True
+        #Make sure this variable has been declared so that we can click on "Start Mapping" at any time.
+        self.image_file_chosen = None
 
         #Handle the case that the user clicks on the "Open Image" button.
         main_window.button_open_image.clicked.connect(lambda: self.open_image_file(main_window))
@@ -126,9 +123,9 @@ class GUI(QMainWindow):
             b = 13
 
         elif source is self.video_file_path:
-            max_len = 44
-            a = 22
-            b = 19
+            max_len = 34
+            a = 17
+            b = 14
 
         #Show the path of the file chosen.
         if source:
@@ -161,9 +158,10 @@ class GUI(QMainWindow):
         #Inform the user that a file could not be chosen.
         else:
             if source_string is "image":
-                label.setText("No image was selected.")
+                label.setText("No image was selected. Please select an image.")
 
             elif source_string is "video":
+                print("We are here!")
                 label.setText("The folder or file name was not specified.")
 
     #Display status tips for all clickable widgets from the main window except for the menu.
@@ -190,11 +188,6 @@ class GUI(QMainWindow):
 
     #Open an image file.
     def open_image_file(self, main_window):
-        #If a default image was previous selected, unselect the default image.
-        self.button_default.setAutoExclusive(False)
-        self.button_default.setChecked(False)
-        self.button_default.setAutoExclusive(True)
-
         #Open the file dialog to select an image file.
         self.image_file_chosen, _ = QFileDialog.getOpenFileName(self, "Open Image", "",
             "JPEG (*.JPEG *.jpeg *.JPG *.jpg *.JPE *.jpe *JFIF *.jfif);; PNG (*.PNG *.png);; GIF (*.GIF *.gif);; Bitmap Files (*.BMP *.bmp *.DIB *.dib);; TIFF (*.TIF *.tif *.TIFF *.tiff);; ICO (*.ICO *.ico)")
@@ -204,9 +197,6 @@ class GUI(QMainWindow):
 
     #Select the default image that was chosen by the user.
     def select_default_image(self, main_window, button_default):
-        #This variable keeps track of the selected default image so we can reference it in other methods.
-        self.button_default = button_default
-
         #Identify the name of the image chosen.
         if button_default is main_window.button_default_image1:
             file_name = "Earth.jpg"
@@ -229,39 +219,28 @@ class GUI(QMainWindow):
             self.image_file_chosen = "../Images/"
             self.image_file_chosen += file_name
         else:
-            self.image_file_chosen = "../Images/Mystery.jpg"
+            self.image_file_chosen = "../Images/Mystery_Man.jpg"
+
 
     #Link the record option from the menu to the record checkbox on the main window.
-    def set_record_action(self, main_window, source):
-        #Handle the case that the user directly clicked on the checkbox. Note that the status of the checkbox is assessed after
-        #the checkbox has been manually toggled.
-        if source == "checkbox" and self.check_status_vr_check_box == True:
-            #If the checkbox was marked true...
-            if main_window.check_box_record_video.isChecked() == True:
-                main_window.check_box_record_video.setStatusTip("Stop Recording")
-                main_window.action_record_video.setText("Stop Recording")
-                main_window.action_record_video.setStatusTip("Stop Recording")
+    def set_record_action(self, main_window, event_source):
+        tog = False
 
-                #Open the file dialog, and handle the case that the user decides not to save their video.
-                if self.save_video(main_window) == False:
+        #Handle the case that the user selected from the menu. The box should be initialized to false.
+        if event_source == "menu":
+            if main_window.check_box_record_video.isChecked() == False:
+                main_window.check_box_record_video.setChecked(True)
+                if self.save_video(main_window) == True:
+                    main_window.check_box_record_video.setStatusTip("Stop Recording")
+                    main_window.action_record_video.setText("Stop Recording")
+                    main_window.action_record_video.setStatusTip("Stop Recording")
+                    tog = True
+                else:
                     main_window.check_box_record_video.setChecked(False)
-                    main_window.check_box_record_video.setStatusTip("Record Video")
-                    main_window.action_record_video.setText("Record Video")
-                    main_window.action_record_video.setStatusTip("Record Video")
+                    tog = False
 
-            #Else, the box was marked false, and then the program checks for the false condition.
-            else:
-                main_window.check_box_record_video.setStatusTip("Record Video")
-                main_window.action_record_video.setText("Record Video")
-                main_window.action_record_video.setStatusTip("Record Video")
-                main_window.label_video_file_path.setText("Video recording has been canceled.")
-                self.video_file_path = None
-
-        #Handle the case that the user chose to record or stop recording through the file menu. Note that the status of the
-        #checkbox is assessed as is, so everything below here here is the inverse of the above.
-        elif source == "menu":
-            #The checkbox is currently true, so we have to unmark it.
-            if main_window.check_box_record_video.isChecked() == True:
+            #Otherwise, the box was already marked true.
+            elif tog == True:
                 main_window.check_box_record_video.setChecked(False)
                 main_window.check_box_record_video.setStatusTip("Record Video")
                 main_window.action_record_video.setText("Record Video")
@@ -269,37 +248,38 @@ class GUI(QMainWindow):
                 main_window.label_video_file_path.setText("Video recording has been canceled.")
                 self.video_file_path = None
 
-            #Else the box was currently marked false, so we have to mark it true.
-            else:
-                self.check_status_vr_check_box = False
-                main_window.check_box_record_video.setChecked(True)
+        #Handle the case that the user directly clicked on the checkbox. Note that the status of the checkbox is assessed after
+        #the checkbox has been manually toggled, so everything below here is the inverse of the above.
+        elif event_source == "checkbox":
+            if main_window.check_box_record_video.isChecked() == True:
                 main_window.check_box_record_video.setStatusTip("Stop Recording")
                 main_window.action_record_video.setText("Stop Recording")
                 main_window.action_record_video.setStatusTip("Stop Recording")
-                
-                #Open the file dialog, and handle the case that the user decides not to save their video.
+                tog = True
                 if self.save_video(main_window) == False:
                     main_window.check_box_record_video.setChecked(False)
                     main_window.check_box_record_video.setStatusTip("Record Video")
                     main_window.action_record_video.setText("Record Video")
                     main_window.action_record_video.setStatusTip("Record Video")
+                    tog = True
 
-                #Reset this variable to true so that we can click on the checkbox later.
-                self.check_status_vr_check_box = True
-                
+            #Else, the box was marked false, and then the program checks for the false condition.
+            elif tog == True:
+                main_window.check_box_record_video.setStatusTip("Record Video")
+                main_window.action_record_video.setText("Record Video")
+                main_window.action_record_video.setStatusTip("Record Video")
+                main_window.label_video_file_path.setText("Video recording has been canceled.")
+                self.video_file_path = None
 
-    #Save the video file.
     def save_video(self, main_window):
-        #If the user has chosen to record a video...
-        if main_window.check_box_record_video.isChecked() == True:
-            #Then ask the user to determine the name of the video file as well as the target directory.
-            self.video_file_path, _ = QFileDialog.getSaveFileName(self, "Save Video", "*.avi", "AVI (*.avi *.AVI)")
+            #If the user has chosen to record a video, then ask the user to determine the name of the video file as well as the target directory.
+            if main_window.check_box_record_video.isChecked() is True:
+                self.video_file_path, _ = QFileDialog.getSaveFileName(self, "Save Video", "*.avi", "AVI (*.avi *.AVI)")
 
-            #On the GUI, indicate whether the user has determined the target directory and name of the video file.
-            self.display_file_path(self.video_file_path, main_window.label_video_file_path, "video")
+                #On the GUI, indicate whether the user has determined the target directory and name of the video file.
+                self.display_file_path(self.video_file_path, main_window.label_video_file_path, "video")
 
-            #Return true if the user chose a file name. Otherwise, return false.
-            return True if self.video_file_path else False
+                return True if self.video_file_path else False
 
     #Map the image to the ball.
     def start_mapping(self, main_window):
@@ -313,6 +293,9 @@ class GUI(QMainWindow):
 
         #Everything is good to go! Send the data to the rest of the program.
         else:
+            print(self.image_file_chosen)
+            print(self.video_file_path)
+
             #Code for Gui.py to run as a standalone.
             if __name__ != "__main__":
                 self.user_input.update_values(self.image_file_chosen, self.video_file_path)

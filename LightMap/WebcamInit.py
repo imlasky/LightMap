@@ -12,7 +12,7 @@ class WebcamInit:
     
     def __init__(self):
         
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(1)
         
     def getFrame(self):
         
