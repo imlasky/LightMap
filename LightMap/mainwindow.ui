@@ -84,7 +84,7 @@
        </spacer>
       </item>
       <item>
-       <spacer name="verticalSpacer">
+       <spacer name="vertical_spacer_left_second">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -896,6 +896,10 @@ QPushButton:checked {
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>button_default_image5</tabstop>
+  <tabstop>button_default_image6</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
