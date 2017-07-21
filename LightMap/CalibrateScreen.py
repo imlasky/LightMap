@@ -45,21 +45,26 @@ class Calibrate:
     
         self.screen_width_space = np.linspace(circ_rad,w-circ_rad,num_points,dtype=np.uint16)
         self.screen_height_space = np.linspace(circ_rad,h-circ_rad,num_points,dtype=np.uint16)
-
-
-
+        
+        down_right_complete = 0
+        up_left_complete = 0
+        
         
 
-        
 
         i = 0
         while True:
-        
             
             self.screen.fill((0,0,0))
+            
+            #if not down_right_complete:
+            pygame.draw.circle(self.screen,(255,255,255),(self.screen_width_space[i],
+                               self.screen_height_space[i]),circ_rad,10)
+            #else:
+             #   pygame.draw.circle(self.screen,(255,255,255),(self.screen_width_space[i],
+              #                 self.screen_height_space[num_points-i -1]),circ_rad,10)
             pygame.display.flip()
             x_loc, y_loc, radius = self.detect.readFramesHough()
-
             
             if radius > 0:
                 self.x_locs.append(x_loc)
@@ -70,13 +75,23 @@ class Calibrate:
             
             time.sleep(0.6)       
             flags = self.myKc.check_keys()
-
-
             if flags[0] or i >= len(self.screen_width_space):
                 break
-        
+            
+            #if i >= len(self.screen_width_space) and not down_right_complete:
+             #   down_right_complete = 1
+              #  i = 0
+               # continue
+                
+            #if i >= len(self.screen_width_space) and not up_left_complete:
+             #   up_left_complete = 1
+              #  time.sleep(0.6)
+               # break
+            
+            
+        #self.screen_width_space = np.concatenate([self.screen_width_space,self.screen_width_space])
+        #self.screen_height_space = np.concatenate([self.screen_height_space,self.screen_height_space[::-1]])
   
-
         self.detect.stopRead()
         self.__interp(circ_rad)
         pygame.display.quit()
@@ -85,11 +100,6 @@ class Calibrate:
         
     def __interp(self,rad):
         
-
-
-    
-
-        
         self.radius_ratio = self.radius/rad
         
         self.fx = interp1d(self.x_locs,self.screen_width_space,bounds_error=False,
@@ -97,7 +107,6 @@ class Calibrate:
         
         self.fy = interp1d(self.y_locs,self.screen_height_space,bounds_error=False,
                            fill_value=0)
-
         
     def getOffsets(self,xold,yold):
         
