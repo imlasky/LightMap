@@ -45,7 +45,7 @@ class Calibrate:
     
         self.screen_width_space = np.linspace(circ_rad,w-circ_rad,num_points,dtype=np.uint16)
         self.screen_height_space = np.linspace(circ_rad,h-circ_rad,num_points,dtype=np.uint16)
->>>>>>> calib
+
         
         down_right_complete = 0
         up_left_complete = 0
@@ -65,7 +65,7 @@ class Calibrate:
             self.screen.fill((0,0,0))
             pygame.display.flip()
             x_loc, y_loc, radius = self.detect.readFramesHough()
->>>>>>> calib
+
             
             if radius > 0:
                 self.x_locs.append(x_loc)
@@ -77,7 +77,7 @@ class Calibrate:
             time.sleep(0.6)       
             flags = self.myKc.check_keys()
 
-=======
+
             if flags[0] or i >= len(self.screen_width_space):
                 break
             
@@ -95,7 +95,7 @@ class Calibrate:
         #self.screen_width_space = np.concatenate([self.screen_width_space,self.screen_width_space])
         #self.screen_height_space = np.concatenate([self.screen_height_space,self.screen_height_space[::-1]])
   
->>>>>>> calib
+
         self.detect.stopRead()
         self.__interp(circ_rad)
         pygame.display.quit()
@@ -104,7 +104,7 @@ class Calibrate:
         
     def __interp(self,rad):
         
-<<<<<<< HEAD
+
     def __interp(self):
     
 
@@ -116,7 +116,7 @@ class Calibrate:
         
         self.fy = interp1d(self.y_locs,self.screen_height_space,bounds_error=False,
                            fill_value=0)
->>>>>>> calib
+
         
     def getOffsets(self,xold,yold):
         
@@ -127,8 +127,4 @@ class Calibrate:
         #return radiusold/self.radius_ratio
         return 6*radiusold
             
-            
-<<<<<<< HEAD
-            
-=======
->>>>>>> calib
+
