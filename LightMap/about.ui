@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>292</width>
+    <height>259</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>About LightMap</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>4</number>
+   </property>
+   <property name="leftMargin">
+    <number>15</number>
+   </property>
+   <property name="topMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>15</number>
+   </property>
+   <property name="bottomMargin">
+    <number>12</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label_1">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="text">
+      <string>For educators, teachers, and game developers who</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>need a more hands-on and interactive experience,</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_3">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>LightMap is a robust image projection framework</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>which allows one to be part of the image. Unlike</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_5">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>current frameworks which rely on static objects,</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_6">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>LightMap responds and interacts with moving</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_7">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>subjects in real-time.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_8">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>LightMap was developed in 2017 by Alec Romine,</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_9">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>Andrew Matrai, Ian Lasky, Kevin Tran, and Zac Freer.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="horizontal_spacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_10">
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+       <italic>true</italic>
+      </font>
+     </property>
+     <property name="text">
+      <string>LightMap was last updated on July 21, 2017.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="horizontal_spacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="button_box">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close</set>
+     </property>
+     <property name="centerButtons">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

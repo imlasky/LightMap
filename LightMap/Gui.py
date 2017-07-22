@@ -2,6 +2,8 @@
     Class: COP4331C (Summer 2017)
     Group: G13
     Graphical User Interface for LightMap
+
+    NAME OF DEVELOPERS, YEAR, PURPOSE, VISION
 '''
 
 #Standard imports.
@@ -55,6 +57,9 @@ class GUI(QMainWindow):
 
     #Add functionality to widgets on the main window.
     def add_main_functionality(self, main_window):
+        #Initialize to indicate that no default images have been chosen.
+        self.button_default = None
+
         #Make sure this variable has been declared so that we can click on "Start Mapping" at any time.
         self.image_file_chosen = None
 
@@ -62,7 +67,7 @@ class GUI(QMainWindow):
         self.video_file_path = None
 
         #If this boolean is true, check the status of the video recording checkbox whenever it changes.
-        self.check_status_vr_check_box = True
+        #self.check_status_vr_check_box = True
 
         #Handle the case that the user clicks on the "Open Image" button.
         main_window.button_open_image.clicked.connect(lambda: self.open_image_file(main_window))
@@ -71,7 +76,7 @@ class GUI(QMainWindow):
         self.init_default_image(main_window)
 
         #Handle the case that the user clicks on the "Record Video" checkbox.
-        main_window.check_box_record_video.toggled.connect(lambda: self.set_record_action(main_window, "checkbox"))
+        #main_window.check_box_record_video.toggled.connect(lambda: self.set_record_action(main_window, "checkbox"))
 
         #Handle the case that the user clicks on the "Start Mapping" button.
         main_window.button_mapping.clicked.connect(lambda: self.start_mapping(main_window))
@@ -88,9 +93,9 @@ class GUI(QMainWindow):
         main_window.action_open_image.triggered.connect(lambda: self.open_image_file(main_window))
 
         #Initialize this command to "Record Video". This command will change to "Stop Recording" later.
-        main_window.action_record_video.setShortcut("CTRL+R")
-        main_window.action_record_video.setStatusTip("Record Video")
-        main_window.action_record_video.triggered.connect(lambda: self.set_record_action(main_window, "menu"))
+        #main_window.action_record_video.setShortcut("CTRL+R")
+        #main_window.action_record_video.setStatusTip("Record Video")
+        #main_window.action_record_video.triggered.connect(lambda: self.set_record_action(main_window, "menu"))
 
         #Action: Start Mapping
         main_window.action_start_mapping.setShortcut("F5")
@@ -113,9 +118,11 @@ class GUI(QMainWindow):
         #Action: LightMap Help
         main_window.action_LightMap_Help.setShortcut("CTRL+H")
         main_window.action_LightMap_Help.setStatusTip("LightMap Help")
+        main_window.action_LightMap_Help.triggered.connect(self.init_help_window)
 
         #Action: About LightMap.
         main_window.action_About_LightMap.setStatusTip("About LightMap")
+        main_window.action_About_LightMap.triggered.connect(self.init_about_window)
 
     #Display the file path of the chosen file, or indicate that no file was chosen.
     def display_file_path(self, source, label, source_string):
@@ -125,10 +132,10 @@ class GUI(QMainWindow):
             a = 18
             b = 13
 
-        elif source is self.video_file_path:
-            max_len = 44
-            a = 22
-            b = 19
+        # elif source is self.video_file_path:
+        #     max_len = 44
+        #     a = 22
+        #     b = 19
 
         #Show the path of the file chosen.
         if source:
@@ -163,13 +170,13 @@ class GUI(QMainWindow):
             if source_string is "image":
                 label.setText("No image was selected.")
 
-            elif source_string is "video":
-                label.setText("The folder or file name was not specified.")
+            # elif source_string is "video":
+            #     label.setText("The folder or file name was not specified.")
 
     #Display status tips for all clickable widgets from the main window except for the menu.
     def display_status(self, main_window):
         main_window.button_open_image.setStatusTip("Open Image")
-        main_window.check_box_record_video.setStatusTip("Record Video")
+#main_window.check_box_record_video.setStatusTip("Record Video")
         main_window.button_mapping.setStatusTip("Start Mapping")
 
         main_window.button_default_image1.setStatusTip("Earth")
@@ -178,6 +185,11 @@ class GUI(QMainWindow):
         main_window.button_default_image4.setStatusTip("Pizza")
         main_window.button_default_image5.setStatusTip("Kappa")
         main_window.button_default_image6.setStatusTip("Mystery Image")
+
+    #Make the About LightMap window.
+    def init_about_window(self):
+        about_window = AboutWindow()
+        about_window.exec()
 
    	#Allow the user to select or deselect a default image.
     def init_default_image(self, main_window):
@@ -188,12 +200,18 @@ class GUI(QMainWindow):
         main_window.button_default_image5.clicked.connect(lambda: self.select_default_image(main_window, main_window.button_default_image5))
         main_window.button_default_image6.clicked.connect(lambda: self.select_default_image(main_window, main_window.button_default_image6))
 
+    #Make the LightMap Help window.
+    def init_help_window(self):
+        help_window = HelpWindow()
+        help_window.exec()
+
     #Open an image file.
     def open_image_file(self, main_window):
         #If a default image was previous selected, unselect the default image.
-        self.button_default.setAutoExclusive(False)
-        self.button_default.setChecked(False)
-        self.button_default.setAutoExclusive(True)
+        if self.button_default:
+            self.button_default.setAutoExclusive(False)
+            self.button_default.setChecked(False)
+            self.button_default.setAutoExclusive(True)
 
         #Open the file dialog to select an image file.
         self.image_file_chosen, _ = QFileDialog.getOpenFileName(self, "Open Image", "",
@@ -231,75 +249,75 @@ class GUI(QMainWindow):
         else:
             self.image_file_chosen = "../Images/Mystery.jpg"
 
-    #Link the record option from the menu to the record checkbox on the main window.
-    def set_record_action(self, main_window, source):
-        #Handle the case that the user directly clicked on the checkbox. Note that the status of the checkbox is assessed after
-        #the checkbox has been manually toggled.
-        if source == "checkbox" and self.check_status_vr_check_box == True:
-            #If the checkbox was marked true...
-            if main_window.check_box_record_video.isChecked() == True:
-                main_window.check_box_record_video.setStatusTip("Stop Recording")
-                main_window.action_record_video.setText("Stop Recording")
-                main_window.action_record_video.setStatusTip("Stop Recording")
+    # #Link the record option from the menu to the record checkbox on the main window.
+    # def set_record_action(self, main_window, source):
+    #     #Handle the case that the user directly clicked on the checkbox. Note that the status of the checkbox is assessed after
+    #     #the checkbox has been manually toggled.
+    #     if source == "checkbox" and self.check_status_vr_check_box == True:
+    #         #If the checkbox was marked true...
+    #         if main_window.check_box_record_video.isChecked() == True:
+    #             main_window.check_box_record_video.setStatusTip("Stop Recording")
+    #             main_window.action_record_video.setText("Stop Recording")
+    #             main_window.action_record_video.setStatusTip("Stop Recording")
 
-                #Open the file dialog, and handle the case that the user decides not to save their video.
-                if self.save_video(main_window) == False:
-                    main_window.check_box_record_video.setChecked(False)
-                    main_window.check_box_record_video.setStatusTip("Record Video")
-                    main_window.action_record_video.setText("Record Video")
-                    main_window.action_record_video.setStatusTip("Record Video")
+    #             #Open the file dialog, and handle the case that the user decides not to save their video.
+    #             if self.save_video(main_window) == False:
+    #                 main_window.check_box_record_video.setChecked(False)
+    #                 main_window.check_box_record_video.setStatusTip("Record Video")
+    #                 main_window.action_record_video.setText("Record Video")
+    #                 main_window.action_record_video.setStatusTip("Record Video")
 
-            #Else, the box was marked false, and then the program checks for the false condition.
-            else:
-                main_window.check_box_record_video.setStatusTip("Record Video")
-                main_window.action_record_video.setText("Record Video")
-                main_window.action_record_video.setStatusTip("Record Video")
-                main_window.label_video_file_path.setText("Video recording has been canceled.")
-                self.video_file_path = None
+    #         #Else, the box was marked false, and then the program checks for the false condition.
+    #         else:
+    #             main_window.check_box_record_video.setStatusTip("Record Video")
+    #             main_window.action_record_video.setText("Record Video")
+    #             main_window.action_record_video.setStatusTip("Record Video")
+    #             main_window.label_video_file_path.setText("Video recording has been canceled.")
+    #             self.video_file_path = None
 
-        #Handle the case that the user chose to record or stop recording through the file menu. Note that the status of the
-        #checkbox is assessed as is, so everything below here here is the inverse of the above.
-        elif source == "menu":
-            #The checkbox is currently true, so we have to unmark it.
-            if main_window.check_box_record_video.isChecked() == True:
-                main_window.check_box_record_video.setChecked(False)
-                main_window.check_box_record_video.setStatusTip("Record Video")
-                main_window.action_record_video.setText("Record Video")
-                main_window.action_record_video.setStatusTip("Record Video")
-                main_window.label_video_file_path.setText("Video recording has been canceled.")
-                self.video_file_path = None
+    #     #Handle the case that the user chose to record or stop recording through the file menu. Note that the status of the
+    #     #checkbox is assessed as is, so everything below here here is the inverse of the above.
+    #     elif source == "menu":
+    #         #The checkbox is currently true, so we have to unmark it.
+    #         if main_window.check_box_record_video.isChecked() == True:
+    #             main_window.check_box_record_video.setChecked(False)
+    #             main_window.check_box_record_video.setStatusTip("Record Video")
+    #             main_window.action_record_video.setText("Record Video")
+    #             main_window.action_record_video.setStatusTip("Record Video")
+    #             main_window.label_video_file_path.setText("Video recording has been canceled.")
+    #             self.video_file_path = None
 
-            #Else the box was currently marked false, so we have to mark it true.
-            else:
-                self.check_status_vr_check_box = False
-                main_window.check_box_record_video.setChecked(True)
-                main_window.check_box_record_video.setStatusTip("Stop Recording")
-                main_window.action_record_video.setText("Stop Recording")
-                main_window.action_record_video.setStatusTip("Stop Recording")
+    #         #Else the box was currently marked false, so we have to mark it true.
+    #         else:
+    #             self.check_status_vr_check_box = False
+    #             main_window.check_box_record_video.setChecked(True)
+    #             main_window.check_box_record_video.setStatusTip("Stop Recording")
+    #             main_window.action_record_video.setText("Stop Recording")
+    #             main_window.action_record_video.setStatusTip("Stop Recording")
                 
-                #Open the file dialog, and handle the case that the user decides not to save their video.
-                if self.save_video(main_window) == False:
-                    main_window.check_box_record_video.setChecked(False)
-                    main_window.check_box_record_video.setStatusTip("Record Video")
-                    main_window.action_record_video.setText("Record Video")
-                    main_window.action_record_video.setStatusTip("Record Video")
+    #             #Open the file dialog, and handle the case that the user decides not to save their video.
+    #             if self.save_video(main_window) == False:
+    #                 main_window.check_box_record_video.setChecked(False)
+    #                 main_window.check_box_record_video.setStatusTip("Record Video")
+    #                 main_window.action_record_video.setText("Record Video")
+    #                 main_window.action_record_video.setStatusTip("Record Video")
 
-                #Reset this variable to true so that we can click on the checkbox later.
-                self.check_status_vr_check_box = True
+    #             #Reset this variable to true so that we can click on the checkbox later.
+    #             self.check_status_vr_check_box = True
                 
 
-    #Save the video file.
-    def save_video(self, main_window):
-        #If the user has chosen to record a video...
-        if main_window.check_box_record_video.isChecked() == True:
-            #Then ask the user to determine the name of the video file as well as the target directory.
-            self.video_file_path, _ = QFileDialog.getSaveFileName(self, "Save Video", "*.avi", "AVI (*.avi *.AVI)")
+    # #Save the video file.
+    # def save_video(self, main_window):
+    #     #If the user has chosen to record a video...
+    #     if main_window.check_box_record_video.isChecked() == True:
+    #         #Then ask the user to determine the name of the video file as well as the target directory.
+    #         self.video_file_path, _ = QFileDialog.getSaveFileName(self, "Save Video", "*.avi", "AVI (*.avi *.AVI)")
 
-            #On the GUI, indicate whether the user has determined the target directory and name of the video file.
-            self.display_file_path(self.video_file_path, main_window.label_video_file_path, "video")
+    #         #On the GUI, indicate whether the user has determined the target directory and name of the video file.
+    #         self.display_file_path(self.video_file_path, main_window.label_video_file_path, "video")
 
-            #Return true if the user chose a file name. Otherwise, return false.
-            return True if self.video_file_path else False
+    #         #Return true if the user chose a file name. Otherwise, return false.
+    #         return True if self.video_file_path else False
 
     #Map the image to the ball.
     def start_mapping(self, main_window):
@@ -317,6 +335,50 @@ class GUI(QMainWindow):
             if __name__ != "__main__":
                 self.user_input.update_values(self.image_file_chosen, self.video_file_path)
                 self.light_map.launch_app(self.user_input)
+
+
+#Make the About LightMap dialog window.
+class AboutWindow(QDialog):
+    def __init__(self):
+        super().__init__()
+
+        self.window_icon = QIcon("../Images/LightMap.png")
+        self.width = 295
+        self.height = 260
+        self.init_about_window()
+
+    def init_about_window(self):
+        about_window = uic.loadUi("about.ui", self)
+        self.setWindowIcon(self.window_icon)
+        about_window.setFixedSize(self.width, self.height)
+        
+        #Handle the case that the user clicks on the "Close" button.
+        about_window.button_box.buttons()[0].clicked.connect(self.close)
+
+        #Show the About LightMap window.
+        self.show()
+
+
+#Make the LightMap Help window.
+class HelpWindow(QDialog):
+    def __init__(self):
+        super().__init__()
+
+        self.window_icon = QIcon("../Images/LightMap.png")
+        self.width = 400
+        self.height = 300
+        self.init_help_window()
+
+    def init_help_window(self):
+        help_window = uic.loadUi("help.ui", self)
+        self.setWindowIcon(self.window_icon)
+        help_window.setFixedSize(self.width, self.height)
+
+        #Handle the case that the user clicks on the "Close" button.
+        help_window.button_box.buttons()[0].clicked.connect(self.close)
+
+        #Show the LightMap Help window.
+        self.show()
 
 #DEBUG: DELETE LATER
 if __name__ == "__main__":

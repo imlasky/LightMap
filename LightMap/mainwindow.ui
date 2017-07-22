@@ -546,63 +546,6 @@ QPushButton:checked {
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="label_video_file_path">
-          <property name="palette">
-           <palette>
-            <active>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>177</red>
-                <green>5</green>
-                <blue>5</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </active>
-            <inactive>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>177</red>
-                <green>5</green>
-                <blue>5</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </inactive>
-            <disabled>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>120</red>
-                <green>120</green>
-                <blue>120</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </disabled>
-           </palette>
-          </property>
-          <property name="text">
-           <string>No Video File Name Set</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="check_box_record_video">
-          <property name="focusPolicy">
-           <enum>Qt::ClickFocus</enum>
-          </property>
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>Record Video</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontal_spacer_under_record">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -849,6 +792,9 @@ QPushButton:checked {
    <property name="text">
     <string>Open Image</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="action_quit">
    <property name="text">
@@ -861,8 +807,17 @@ QPushButton:checked {
    </property>
   </action>
   <action name="action_record_video">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Record Video</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="action_stop_recording">
