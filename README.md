@@ -10,7 +10,7 @@
 [LightMap Burndown Chart](https://docs.google.com/spreadsheets/d/1Ahi36pMBZp_S9xYot1CPSjrou3HqOCyGpo3ACNAwtpA/edit?usp=sharing) (note: subsequent sheets show previous burndown charts)
 
 [LightMap UML Diagrams](https://github.com/imlasky/LightMap/tree/master/Documentation/UML)
------------------------------------------------------
+
 
 To build from source
 -----------------------------------------------------
