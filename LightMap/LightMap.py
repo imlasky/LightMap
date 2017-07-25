@@ -38,6 +38,8 @@ class LightMap():
         self.video = vr.VideoRecorder('output.avi')
         self.offset_x = 0
         self.offset_y = 0
+        self.correctx = 375
+        self.correcty = 185
 
 
         self.processed_images = self.images.image_processing(user_input.filepath)
@@ -73,14 +75,23 @@ class LightMap():
 #            if user_input.record_video:
 #                self.video.record_frame(self.detect.getFrame())
         
-            self.project.projectImage(self.processed_surface[frame],self.offset_x-375,self.offset_y-185,int(self.radius))
+            self.project.projectImage(self.processed_surface[frame],self.offset_x-self.correctx,self.offset_y-correcty,int(self.radius))
             
             frame += 1
             rad_ind += 1
             flags = self.project.event()
+            if flags[2]:
+                self.correcty -= 5
+            elif flags[3]:
+                self.correcty += 5
+            elif flags[4]:
+                self.correctx += 5
+            elif flags[5]:
+                self.correctx -= 5
             
             if flags[0]:
                 break
+	
         
         self.project.stopProjecting()
         self.detect.stopRead()
